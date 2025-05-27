@@ -15,16 +15,20 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->string('nationality');
+            $table->string('gender');
+            $table->boolean('verified');
+            $table->integer('ranking');
+            $table->string('avatar');
+            $table->string('handle');
+            $table->string('description');
+            $table->string('steam_profile');
+            $table->date('birth_date');
+            $table->string('status');
+            $table->string('profile');
+            $table->bigInteger('theme_id');
             $table->timestamps();
-        });
-
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
         });
 
         Schema::create('sessions', function (Blueprint $table) {
@@ -43,7 +47,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
 };

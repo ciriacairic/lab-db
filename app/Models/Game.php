@@ -15,7 +15,9 @@ class Game extends Model
         'platforms' => 'array',
         'categories' => 'array',
         'genres' => 'array',
-        'metacritic' => 'array'
+        'metacritic' => 'array',
+        'recommendations' => 'array',
+        'release_date' => 'array'
     ];
     public static function normalizeGameData(array $gameData): array
     {

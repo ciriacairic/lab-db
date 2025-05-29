@@ -16,6 +16,8 @@ return new class extends Migration
             $table->bigInteger('publisher_id');
             $table->bigInteger('game_id');
             $table->timestamps();
+
+            $table->unique(['publisher_id', 'game_id']);
         });
 
         Schema::create('developer_games', function (Blueprint $table) {
@@ -23,6 +25,8 @@ return new class extends Migration
             $table->bigInteger('developer_id');
             $table->bigInteger('game_id');
             $table->timestamps();
+
+            $table->unique(['developer_id', 'game_id']);
         });
 
         Schema::create('tag_games', function (Blueprint $table) {
@@ -30,6 +34,8 @@ return new class extends Migration
             $table->bigInteger('tag_id');
             $table->bigInteger('game_id');
             $table->timestamps();
+
+            $table->unique(['game_id', 'tag_id']);
         });
     }
 

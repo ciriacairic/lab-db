@@ -85,7 +85,7 @@ class CrawlerSteam extends Command
                                 ]);
                             }
 
-                            DeveloperGame::create([
+                            DeveloperGame::updateOrCreate([
                                 'developer_id' => $developer->id,
                                 'game_id' => $game->id,
                             ]);
@@ -102,7 +102,7 @@ class CrawlerSteam extends Command
                                 ]);
                             }
 
-                            PublisherGame::create([
+                            PublisherGame::updateOrCreate([
                                 'publisher_id' => $publisher->id,
                                 'game_id' => $game->id,
                             ]);
@@ -111,44 +111,51 @@ class CrawlerSteam extends Command
 
                     if (isset($gameData['genres'])) {
                         foreach ($gameData['genres'] as $genreName) {
-                            $tag = Tag::where('name', $genreName['description'])->where('type', 'genre')->first();
+                            if ($this->isAscii($genreName['description'])) {
+                                $tag = Tag::where('name', $genreName['description'])->where('type', 'genre')->first();
 
-                            if (!$tag) {
-                                $tag = Tag::create([
-                                    'name' => $genreName['description'],
-                                    'type' => 'genre',
+                                if (!$tag) {
+                                    $tag = Tag::create([
+                                        'name' => $genreName['description'],
+                                        'type' => 'genre',
+                                    ]);
+                                }
+
+                                TagGame::updateOrCreate([
+                                    'tag_id' => $tag->id,
+                                    'game_id' => $game->id,
                                 ]);
                             }
-
-                            TagGame::create([
-                                'tag_id' => $tag->id,
-                                'game_id' => $game->id,
-                            ]);
                         }
                     }
 
                     if (isset($gameData['categories'])) {
                         foreach ($gameData['categories'] as $categoryName) {
-                            $tag = Tag::where('name', $categoryName['description'])->where('type', 'category')->first();
+                            if ($this->isAscii($categoryName['description'])) {
+                                $tag = Tag::where('name', $categoryName['description'])->where('type', 'category')->first();
 
-                            if (!$tag) {
-                                $tag = Tag::create([
-                                    'name' => $genreName['description'],
-                                    'type' => 'category',
+                                if (!$tag) {
+                                    $tag = Tag::create([
+                                        'name' => $categoryName['description'],
+                                        'type' => 'category',
+                                    ]);
+                                }
+
+                                TagGame::updateOrCreate([
+                                    'tag_id' => $tag->id,
+                                    'game_id' => $game->id,
                                 ]);
                             }
 
-                            TagGame::create([
-                                'tag_id' => $tag->id,
-                                'game_id' => $game->id,
-                            ]);
                         }
                     }
                 }
             }
 
         }
+    }
 
-
+    function isAscii(string $text): bool {
+        return preg_match('/[^\x00-\x7F]/', $text) === 0;
     }
 }

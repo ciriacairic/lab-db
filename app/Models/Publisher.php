@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Library extends Model
+class Publisher extends Model
 {
     //
 }

@@ -15,21 +15,39 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->bigInteger('owner_id');
+            $table->foreignId('owner_id')
+                ->constrained('users')
+                ->onDelete('cascade');
             $table->timestamps();
+
+            $table->unique(['owner_id', 'name']);
         });
 
         Schema::create('library_users', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('library_id');
-            $table->bigInteger('user_id');
+
+            $table->foreignId('library_id')
+                ->constrained('libraries')
+                ->onDelete('cascade');
+
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
 
         Schema::create('library_games', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('library_id');
-            $table->bigInteger('game_id');
+
+            $table->foreignId('library_id')
+                ->constrained('libraries')
+                ->onDelete('cascade');
+
+            $table->foreignId('game_id')
+                ->constrained('games')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

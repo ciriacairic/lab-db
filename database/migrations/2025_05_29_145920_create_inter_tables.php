@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('publisher_games', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('publisher_id');
-            $table->bigInteger('game_id');
+
+            $table->foreignId('publisher_id')
+                ->constrained('publishers')
+                ->onDelete('cascade');
+
+            $table->foreignId('game_id')
+                ->constrained('games')
+                ->onDelete('cascade');
+
             $table->timestamps();
 
             $table->unique(['publisher_id', 'game_id']);
@@ -22,8 +29,15 @@ return new class extends Migration
 
         Schema::create('developer_games', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('developer_id');
-            $table->bigInteger('game_id');
+
+            $table->foreignId('developer_id')
+                ->constrained('developers')
+                ->onDelete('cascade');
+
+            $table->foreignId('game_id')
+                ->constrained('games')
+                ->onDelete('cascade');
+
             $table->timestamps();
 
             $table->unique(['developer_id', 'game_id']);
@@ -31,8 +45,15 @@ return new class extends Migration
 
         Schema::create('tag_games', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('tag_id');
-            $table->bigInteger('game_id');
+
+            $table->foreignId('tag_id')
+                ->constrained('tags')
+                ->onDelete('cascade');
+
+            $table->foreignId('game_id')
+                ->constrained('games')
+                ->onDelete('cascade');
+
             $table->timestamps();
 
             $table->unique(['game_id', 'tag_id']);

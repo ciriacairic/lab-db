@@ -25,12 +25,8 @@ return new class extends Migration
             $table->string('capsule_image')->nullable();
             $table->string('capsule_imagev5')->nullable();
             $table->string('website')->nullable();
-            $table->json('developers')->nullable();
-            $table->json('publishers')->nullable();
             $table->json('platforms')->nullable();
             $table->json('metacritic')->nullable();
-            $table->json('categories')->nullable();
-            $table->json('genres')->nullable();
             $table->json('recommendations')->nullable();
             $table->json('release_date')->nullable();
             $table->timestamps();

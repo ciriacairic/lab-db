@@ -4,10 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Game extends Model
+class Game extends BaseModel
 {
-    protected $guarded = [];
-
     protected $casts = [
         'dlc' => 'array',
         'developers' => 'array',
@@ -34,12 +32,8 @@ class Game extends Model
             'capsule_image' => $gameData['capsule_image'] ?? null,
             'capsule_imagev5' => $gameData['capsule_imagev5'] ?? null,
             'website' => $gameData['website'] ?? null,
-            'developers' => $gameData['developers'] ?? null,
-            'publishers' => $gameData['publishers'] ?? null,
             'platforms' => $gameData['platforms'] ?? null,
             'metacritic' => $gameData['metacritic'] ?? null,
-            'categories' => $gameData['categories'] ?? null,
-            'genres' => $gameData['genres'] ?? null,
             'recommendations' => $gameData['recommendations'] ?? null,
             'release_date' => $gameData['release_date'] ?? null,
         ];

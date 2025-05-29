@@ -2,7 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Developer;
+use App\Models\DeveloperGame;
 use App\Models\Game;
+use App\Models\Publisher;
+use App\Models\PublisherGame;
+use App\Models\Tag;
+use App\Models\TagGame;
 use App\Observers\SteamObserver;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -64,10 +70,80 @@ class CrawlerSteam extends Command
                     $gameData = $json[$appId]['data'];
 
                     $normalizedData = Game::normalizeGameData($gameData);
-                    Game::updateOrCreate(
+                    $game = Game::updateOrCreate(
                         ['name' => $normalizedData['name']],
                         $normalizedData
                     );
+
+                    if (isset($gameData['developers'])){
+                        foreach ($gameData['developers'] as $developerName) {
+                            $developer = Developer::where('name', $developerName)->first();
+
+                            if (!$developer) {
+                                $developer = Developer::create([
+                                    'name' => $developerName,
+                                ]);
+                            }
+
+                            DeveloperGame::create([
+                                'developer_id' => $developer->id,
+                                'game_id' => $game->id,
+                            ]);
+                        }
+                    }
+
+                    if (isset($gameData['publishers'])){
+                        foreach ($gameData['publishers'] as $publisherName) {
+                            $publisher = Publisher::where('name', $publisherName)->first();
+
+                            if (!$publisher) {
+                                $publisher = Publisher::create([
+                                    'name' => $publisherName,
+                                ]);
+                            }
+
+                            PublisherGame::create([
+                                'publisher_id' => $publisher->id,
+                                'game_id' => $game->id,
+                            ]);
+                        }
+                    }
+
+                    if (isset($gameData['genres'])) {
+                        foreach ($gameData['genres'] as $genreName) {
+                            $tag = Tag::where('name', $genreName['description'])->where('type', 'genre')->first();
+
+                            if (!$tag) {
+                                $tag = Tag::create([
+                                    'name' => $genreName['description'],
+                                    'type' => 'genre',
+                                ]);
+                            }
+
+                            TagGame::create([
+                                'tag_id' => $tag->id,
+                                'game_id' => $game->id,
+                            ]);
+                        }
+                    }
+
+                    if (isset($gameData['categories'])) {
+                        foreach ($gameData['categories'] as $categoryName) {
+                            $tag = Tag::where('name', $categoryName['description'])->where('type', 'category')->first();
+
+                            if (!$tag) {
+                                $tag = Tag::create([
+                                    'name' => $genreName['description'],
+                                    'type' => 'category',
+                                ]);
+                            }
+
+                            TagGame::create([
+                                'tag_id' => $tag->id,
+                                'game_id' => $game->id,
+                            ]);
+                        }
+                    }
                 }
             }
 

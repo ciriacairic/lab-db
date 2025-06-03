@@ -112,6 +112,18 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('MONGODB_HOST', 'mongo'),
+            'port'     => env('MONGODB_PORT', 27017),
+            'database' => env('MONGODB_DATABASE', 'laravel_app'),
+            'username' => env('MONGO_USERNAME', 'root'),
+            'password' => env('MONGO_PASSWORD', 'example'),
+            'options'  => [
+                'authSource' => 'admin'
+            ]
+        ],
+
     ],
 
     /*

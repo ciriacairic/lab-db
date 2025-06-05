@@ -6,6 +6,8 @@ namespace app\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Library;
+use App\Models\Theme;
 
 class User extends Authenticatable
 {
@@ -17,11 +19,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -33,16 +31,21 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected static function booted()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        static::created(function ($user) {
+            $user->password = bcrypt($user->password);
+
+            Library::create([
+                'owner_id' => $user->id,
+                'name' => 'Favoritos',
+                'description' => 'Biblioteca de favoritos',
+            ]);
+
+            Theme::create([
+                'user_id' => $user->id,
+                'name' => 'Padrão',
+            ]);
+        });
     }
 }

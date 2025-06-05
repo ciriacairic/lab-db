@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('handle')->nullable();
             $table->string('description')->nullable();
             $table->string('steam_profile')->nullable();
-            $table->date('birth_date');
+            $table->string('birth_date');
             $table->string('status')->default('active');
             $table->string('role')->nullable();
             $table->bigInteger('theme_id')->nullable();

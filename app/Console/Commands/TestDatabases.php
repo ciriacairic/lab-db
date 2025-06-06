@@ -14,6 +14,7 @@ use App\Models\TagGame;
 use app\Models\User;
 use App\Models\UserUser;
 use Illuminate\Console\Command;
+use Laudis\Neo4j\ClientBuilder;
 
 class TestDatabases extends Command
 {
@@ -76,6 +77,21 @@ class TestDatabases extends Command
         echo $genres->toJson(JSON_PRETTY_PRINT);
 
         $userId = $user->id;
+        $client = ClientBuilder::create()
+            ->withDriver('bolt', 'bolt://neo4j:7687')
+            ->build();
+        $gamesRatedByFollowers = $client->run(
+            'MATCH (:User {id: $userId})<-[:FOLLOWS]-(follower:User)-[r:RATED]->(g:Game)
+     RETURN DISTINCT g',
+            ['userId' => (string) $userId]
+        );
+        echo "\nJogos que os seguidores avaliaram:";
+        foreach ($gamesRatedByFollowers as $result) {
+            $gameNode = $result->get('g');
+            $game = Game::where('id', $gameNode->id)->select('name')->first();
+            echo $game;
+        }
+
         $user->delete();
         $libraries = Library::where('owner_id', $userId)->get();
         echo "\nBibliotecas do user após deletar apenas o user:";

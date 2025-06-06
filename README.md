@@ -22,6 +22,7 @@ sh docker-compose-up.sh
 Acesse o container workspace
 ```
 docker-compose exec --user=laradock workspace bash
+composer install
 php artisan migrate
 php artisan key:generate
 ```

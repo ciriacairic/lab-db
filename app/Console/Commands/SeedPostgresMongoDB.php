@@ -13,21 +13,21 @@ use app\Models\User;
 use App\Models\UserUser;
 use Illuminate\Console\Command;
 
-class SeedPostgres extends Command
+class SeedPostgresMongoDB extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'seed';
+    protected $signature = 'seed-ps-mongo';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Popula os bancos Postgres e MongoDB';
 
     /**
      * Execute the console command.

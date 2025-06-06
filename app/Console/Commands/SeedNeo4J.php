@@ -15,21 +15,21 @@ use App\Models\UserUser;
 use Illuminate\Console\Command;
 use Laudis\Neo4j\ClientBuilder;
 
-class TestNeo4jConnection extends Command
+class SeedNeo4J extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'neo';
+    protected $signature = 'seed-neo';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Popula o banco neo4j';
 
     /**
      * Execute the console command.

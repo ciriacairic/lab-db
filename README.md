@@ -19,7 +19,7 @@ Na pasta do laradock:
 cp .env.example .env
 sh docker-compose-up.sh
 ```
-Access the workspace container
+Acesse o container workspace
 ```
 docker-compose exec --user=laradock workspace bash
 php artisan migrate

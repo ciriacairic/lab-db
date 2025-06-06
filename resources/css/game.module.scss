@@ -1,0 +1,44 @@
+.gameDetail {
+    max-width: 800px;
+    margin: auto;
+    padding: 1rem;
+    font-family: sans-serif;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.gameHeaderTitle {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.meta {
+    color: #777;
+}
+
+.gameContent {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.gameCoverImage {
+    width: 200px;
+    border-radius: 4px;
+}
+
+.gameInfoText {
+    margin: 0.5rem 0;
+}
+
+.gameRatingText,
+.reviewsText {
+    margin-top: 1.5rem;
+}
+
+.review {
+    margin-top: 1rem;
+    background: #eee;
+    padding: 0.5rem;
+    border-left: 4px solid #ccc;
+}

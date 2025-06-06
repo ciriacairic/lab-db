@@ -1,0 +1,33 @@
+.reviewCard{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f4f4f4;
+  color: black;
+  border: 1px solid #E0E0E0;
+}
+
+.reviewHeader{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  background-color: #e0e0e0;
+  color: black;
+}
+
+.reviewRating{
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: orange;
+  padding: 1rem;
+}
+
+.reviewComment{
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 1rem;
+}

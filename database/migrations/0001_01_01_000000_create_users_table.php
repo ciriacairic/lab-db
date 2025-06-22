@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('steam_profile')->nullable();
             $table->string('birth_date');
+            $table->string('account_creation_date');
             $table->string('status')->default('active');
             $table->string('role')->nullable();
             $table->bigInteger('theme_id')->nullable();
@@ -38,6 +39,16 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+        });
+
+        Schema::create('followers', function (Blueprint $table) {
+            $table->id();
+            $table->string('user_id');       
+            $table->string('follower_id');  
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('email')->on('users')->onDelete('cascade');
+            $table->foreign('follower_id')->references('email')->on('users')->onDelete('cascade');
         });
     }
 

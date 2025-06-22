@@ -29,6 +29,7 @@ return new class extends Migration
             $table->json('metacritic')->nullable();
             $table->json('recommendations')->nullable();
             $table->json('release_date')->nullable();
+            $table->json('end_service_date')->nullable();
             $table->timestamps();
         });
     }

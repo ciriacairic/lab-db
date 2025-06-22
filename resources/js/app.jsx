@@ -1,11 +1,11 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
 import {
   BrowserRouter,
   Routes,
   Route,
 } from 'react-router-dom';
-
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import '../css/app.scss';
 
 import HomePage from './pages/home';
@@ -30,5 +30,5 @@ const App = () => (
   </BrowserRouter>
 );
 
-const root = createRoot(document.getElementById('app'));
+const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(<App />);

@@ -7,7 +7,7 @@ class NodePublisher extends NeoModel
 {
     protected $label = 'Publisher';
 
-    public function tags()
+    public function publisher()
     {
         return $this->hasMany(NodeGame::class, 'PUBLISHED_BY');
     }

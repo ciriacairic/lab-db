@@ -3,7 +3,7 @@
 namespace App\Models\Neo4j;
 use Vinelab\NeoEloquent\Eloquent\Model as NeoModel;
 
-class NodeTags extends NeoModel
+class NodeTag extends NeoModel
 {
     protected $label = 'Tag';
 

@@ -9,11 +9,11 @@ class NodeUser extends NeoModel
 
     public function friends()
     {
-        return $this->hasMany(self::class, 'FRIENDS_WITH');
+      return $this->hasMany(self::class, 'FRIENDS_WITH');
     }
 
     public function likedGames()
     {
-        return $this->hasMany(NodeGame::class, 'LIKED');
+      return $this->hasMany(NodeGame::class, 'LIKED');
     }
 }

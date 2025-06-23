@@ -7,7 +7,7 @@ class NodeFranchise extends NeoModel
 {
     protected $label = 'Franchise';
 
-    public function tags()
+    public function franchise()
     {
         return $this->hasMany(NodeGame::class, 'CONTAINS');
     }

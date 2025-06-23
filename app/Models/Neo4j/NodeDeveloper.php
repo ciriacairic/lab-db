@@ -7,7 +7,7 @@ class NodeDeveloper extends NeoModel
 {
     protected $label = 'Developer';
 
-    public function tags()
+    public function developer()
     {
         return $this->hasMany(NodeGame::class, 'CREATED_BY');
     }

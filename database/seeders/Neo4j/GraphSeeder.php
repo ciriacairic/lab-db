@@ -1,31 +1,83 @@
 <?php
 
+namespace Database\Seeders\Neo4j;
+
+use Illuminate\Database\Seeder;
+
+use App\Models\User;
+use App\Models\Game;
+use App\Models\Franchise;
+use App\Models\Publisher;
+use App\Models\Developer;
+use App\Models\Tag;
+
 use App\Models\Neo4j\NodeUser;
 use App\Models\Neo4j\NodeGame;
-use App\Models\Neo4j\NodeTag;
-use App\Models\Neo4j\NodeDeveloper;
+use App\Models\Neo4j\NodeFranchise;
 use App\Models\Neo4j\NodePublisher;
+use App\Models\Neo4j\NodeDeveloper;
+use App\Models\Neo4j\NodeTag;
 
 class GraphSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        $john = NodeUser::create(['email' => 'john@example.com']);
-        $jane = NodeUser::create(['email' => 'jane@example.com']);
+        User::all()->each(function ($user) {
+            NodeUser::firstOrCreate([
+                'sql_id' => $user->email,
+                'name' => $user->nome,
+            ]);
+        });
 
-        $john->friends()->save($jane);
+        Game::with(
+          ['franchise', 'developer', 'publisher', 'tags']
+        )->get()->each(function ($game) {
 
-        $game = NodeGame::create(['title' => 'Elden Ring']);
-        $tag = NodeTag::create(['name' => 'Open World']);
-        $dev = NodeDeveloper::create(['name' => 'FromSoftware']);
-        $pub = NodePublisher::create(['name' => 'Bandai Namco Entertainment']);
+            $nodeGame = NodeGame::firstOrCreate([
+                'sql_id' => $game->id,
+                'name' => $game->titulo,
+            ]);
 
-        $game->developer()->associate($dev);
-        $game->publisher()->associate($pub);
-        $game->save();
+            $sqlDev = $game->developer;
+            if ($sqlDev) {
+                $nodeDev = NodeDeveloper::firstOrCreate([
+                    'sql_id' => $sqlDev->id,
+                    'name' => $sqlDev->name,
+                ]);
+                $nodeGame->developer()->associate($nodeDev);
+            }
 
-        $game->tags()->save($tag);
+            $sqlPub = $game->publisher;
+            if ($sqlPub) {
+                $nodePub = NodePublisher::firstOrCreate([
+                    'sql_id' => $sqlPub->id,
+                    'name' => $sqlPub->name,
+                ]);
+                $nodeGame->publisher()->associate($nodePub);
+            }
 
-        $john->likedGames()->save($game);
+            $sqlFranchise = $game->franchise;
+            if ($sqlFranchise) {
+                $nodeFranchise = NodeFranchise::firstOrCreate([
+                    'sql_id' => $sqlFranchise->id,
+                    'name' => $sqlFranchise->name,
+                ]);
+                $nodeGame->franchise()->associate($nodeFranchise);
+            }
+
+            $sqlTags = $game->tags;
+            foreach ($sqlTags as $sqlTag) {
+                $nodeTag = NodeTag::firstOrCreate([
+                    'sql_id' => $sqlTag->id,
+                    'name' => $sqlTag->name,
+                ]);
+
+                if (!$nodeGame->tags()->where('name', $nodeTag->name)->exists()) {
+                    $nodeGame->tags()->save($nodeTag);
+                }
+            }
+
+            $nodeGame->save();
+        });
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Platform;
 
 class Game extends BaseModel
 {
@@ -17,6 +17,81 @@ class Game extends BaseModel
         'recommendations' => 'array',
         'release_date' => 'array'
     ];
+
+    public function platforms()
+    {
+        return $this->belongsToMany(Platform::class, 'game_platform')
+                    ->withPivot([
+                        'release_date', 'end_service_date',
+                        'developer_id', 'publisher_id',
+                        'dlc', 'metacritic', 'recommendations'
+                    ])
+                    ->withTimestamps();
+    }
+
+    public function platformsWithDetails()
+    {
+        return $this->hasMany(GamePlatform::class);
+    }
+
+    public function franchise()
+    {
+        return $this->belongsTo(Franchise::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'game_tag');
+    }
+
+    public function getTechnicalScoreAttribute()
+    {
+        $reviews = Review::where('game_id', $this->id)->get();
+
+        if ($reviews->isEmpty()) return null;
+
+        $technicalAverages = [];
+
+        foreach ($reviews as $review) {
+            if (!isset($review->scores)) continue;
+
+            $filtered = collect($review->scores)->except('emotional');
+            $count = $filtered->count();
+
+            if ($count > 0) {
+                $technicalAverages[] = $filtered->sum() / $count;
+            }
+        }
+
+        return count($technicalAverages)
+            ? round(array_sum($technicalAverages) / count($technicalAverages), 2)
+            : null;
+    }
+
+    public function getSubjectiveScoreAttribute()
+    {
+        $reviews = Review::where('game_id', $this->id)->get();
+
+        if ($reviews->isEmpty()) return null;
+
+        $subjectiveAverages = [];
+
+        foreach ($reviews as $review) {
+            if (!isset($review->scores)) continue;
+
+            $all = collect($review->scores);
+            $count = $all->count();
+
+            if ($count > 0) {
+                $subjectiveAverages[] = $all->sum() / $count;
+            }
+        }
+
+        return count($subjectiveAverages)
+            ? round(array_sum($subjectiveAverages) / count($subjectiveAverages), 2)
+            : null;
+    }
+
     public static function normalizeGameData(array $gameData): array
     {
         return [

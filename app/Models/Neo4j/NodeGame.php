@@ -7,6 +7,11 @@ class NodeGame extends NeoModel
 {
     protected $label = 'Game';
 
+    protected $fillable = [
+      'sql_game_id',
+      'name',
+    ];
+
     public function tags()
     {
         return $this->hasMany(NodeTags::class, 'HAS_TAG');

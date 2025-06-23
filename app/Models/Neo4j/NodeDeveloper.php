@@ -7,6 +7,11 @@ class NodeDeveloper extends NeoModel
 {
     protected $label = 'Developer';
 
+    protected $fillable = [
+      'sql_developer_id',
+      'name',
+    ];
+
     public function developer()
     {
         return $this->hasMany(NodeGame::class, 'CREATED_BY');

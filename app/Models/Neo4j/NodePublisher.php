@@ -6,6 +6,11 @@ use Vinelab\NeoEloquent\Eloquent\Model as NeoModel;
 class NodePublisher extends NeoModel
 {
     protected $label = 'Publisher';
+    
+    protected $fillable = [
+      'sql_publisher_id',
+      'name'
+    ];
 
     public function publisher()
     {

@@ -1,0 +1,20 @@
+.loginForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+}
+
+.loginFormInput {
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.loginFormButton {
+    background-color: #007BFF;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+}

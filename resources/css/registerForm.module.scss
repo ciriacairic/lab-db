@@ -1,0 +1,25 @@
+.registerForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+}
+
+.registerFormInput {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.registerFormButton {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  cursor: pointer;
+}
+
+.registerFormButton:hover {
+  background-color: #45a049;
+}

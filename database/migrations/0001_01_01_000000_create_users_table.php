@@ -17,16 +17,17 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('nationality')->nullable();
-            $table->string('gender')->nullable();
+            $table->enum('gender', ['male', 'female', 'other'])->nullable();
             $table->boolean('verified')->default(false);
-            $table->integer('ranking')->nullable();
+            $table->integer('ranking')->default(0);
             $table->string('avatar')->nullable();
-            $table->string('handle')->nullable();
+            $table->string('handle')->unique();
             $table->string('description')->nullable();
             $table->string('steam_profile')->nullable();
             $table->string('birth_date');
-            $table->string('status')->default('active');
-            $table->string('role')->nullable();
+            $table->timestamp('account_creation_date')->useCurrent();
+            $table->enum('status', ['active', 'banned'])->default('active');
+            $table->string('role', ['common', 'moderator', 'administrator'])->default('common');
             $table->bigInteger('theme_id')->nullable();
             $table->timestamps();
         });
@@ -38,6 +39,16 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+        });
+
+        Schema::create('followers', function (Blueprint $table) {
+            $table->id();
+            $table->string('user_id');       
+            $table->string('follower_id');  
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('email')->on('users')->onDelete('cascade');
+            $table->foreign('follower_id')->references('email')->on('users')->onDelete('cascade');
         });
     }
 

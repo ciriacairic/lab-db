@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Publisher extends BaseModel
+class Franchise extends BaseModel
 {
     protected $fillable = ['name', 'description'];
 
-    public function gameVersions()
+    public function games()
     {
-        return $this->hasMany(GamePlatform::class);
+        return $this->hasMany(Game::class);
     }
 }

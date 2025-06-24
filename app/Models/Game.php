@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Models;
+use App\Models\Mongo\Review;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Platform;
+use Laudis\Neo4j\ClientBuilder;
 
 class Game extends BaseModel
 {
@@ -112,6 +114,36 @@ class Game extends BaseModel
             'recommendations' => $gameData['recommendations'] ?? null,
             'release_date' => $gameData['release_date'] ?? null,
         ];
+    }
+
+    public function getRecommendedGames()
+    {
+        $client = ClientBuilder::create()
+            ->withDriver('bolt', 'bolt://neo4j:7687')
+            ->build();
+
+        $result = $client->run(
+            'MATCH (g:Game {id: $gameId})<-[:TAGGED]-(t:Tag)-[:TAGGED]->(other:Game)
+     WHERE other.id <> $gameId
+     WITH other, COUNT(t) AS shared_tags
+     ORDER BY shared_tags DESC
+     LIMIT 20
+     RETURN other.id AS gameId, shared_tags',
+            ['gameId' => (string) $this->id]
+        );
+
+        $similarGames = collect($result)->map(fn($record) => [
+            'game_id' => $record->get('gameId'),
+            'shared_tags' => $record->get('shared_tags'),
+        ]);
+
+        $gameIds = $similarGames->pluck('game_id');
+
+        $games = Game::whereIn('id', $gameIds)->get()->keyBy('id');
+
+        $orderedGames = $gameIds->map(fn($id) => $games[$id])->filter();
+
+        return $orderedGames->values();
     }
 }
 

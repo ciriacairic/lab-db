@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Platforms extends BaseModel
+class Platform extends BaseModel
 {
     public function games()
     {

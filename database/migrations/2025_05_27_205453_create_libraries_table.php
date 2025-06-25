@@ -23,20 +23,6 @@ return new class extends Migration
             $table->unique(['owner_id', 'name']);
         });
 
-        Schema::create('library_users', function (Blueprint $table) {
-            $table->id();
-
-            $table->foreignId('library_id')
-                ->constrained('libraries')
-                ->onDelete('cascade');
-
-            $table->foreignId('user_id')
-                ->constrained('users')
-                ->onDelete('cascade');
-
-            $table->timestamps();
-        });
-
         Schema::create('library_games', function (Blueprint $table) {
             $table->id();
 

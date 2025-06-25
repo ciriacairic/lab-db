@@ -45,6 +45,11 @@ class Game extends BaseModel
     {
         return $this->belongsToMany(Tag::class, 'game_tag');
     }
+    
+    public function libraries()
+    {
+        return $this->belongsToMany(Library::class, 'library_games');
+    }
 
     public function getTechnicalScoreAttribute()
     {

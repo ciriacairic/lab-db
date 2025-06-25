@@ -49,6 +49,7 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('email')->on('users')->onDelete('cascade');
             $table->foreign('follower_id')->references('email')->on('users')->onDelete('cascade');
+            $table->unique(['user_id', 'follower_id']);
         });
     }
 

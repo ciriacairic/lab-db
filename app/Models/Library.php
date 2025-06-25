@@ -8,6 +8,6 @@ class Library extends BaseModel
 {
     public function games()
     {
-        return $this->belongsToMany(Game::class, 'library_game');
+        return $this->belongsToMany(Game::class, 'library_games');
     }
 }

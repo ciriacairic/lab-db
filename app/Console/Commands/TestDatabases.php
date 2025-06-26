@@ -10,7 +10,7 @@ use App\Models\LibraryGame;
 use App\Models\Publisher;
 use App\Models\PublisherGame;
 use App\Models\Tag;
-use App\Models\TagGame;
+use App\Models\GameTag;
 use app\Models\User;
 use App\Models\UserUser;
 use Illuminate\Console\Command;
@@ -68,11 +68,11 @@ class TestDatabases extends Command
         echo "\nDesenvolvedores:";
         echo $developers->toJson(JSON_PRETTY_PRINT);
 
-        $categories = Tag::where('type', 'category')->whereIn('id', TagGame::where('game_id', $game->id)->pluck('tag_id'))->select('name')->get();
+        $categories = Tag::where('type', 'category')->whereIn('id', GameTag::where('game_id', $game->id)->pluck('tag_id'))->select('name')->get();
         echo "\nCategorias:";
         echo $categories->toJson(JSON_PRETTY_PRINT);
 
-        $genres = Tag::where('type', 'genre')->whereIn('id', TagGame::where('game_id', $game->id)->pluck('tag_id'))->select('name')->get();
+        $genres = Tag::where('type', 'genre')->whereIn('id', GameTag::where('game_id', $game->id)->pluck('tag_id'))->select('name')->get();
         echo "\nGêneros:";
         echo $genres->toJson(JSON_PRETTY_PRINT);
 

@@ -8,7 +8,7 @@ use App\Models\Game;
 use App\Models\Publisher;
 use App\Models\PublisherGame;
 use App\Models\Tag;
-use App\Models\TagGame;
+use App\Models\GameTag;
 use App\Observers\SteamObserver;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -121,7 +121,7 @@ class CrawlerSteam extends Command
                                     ]);
                                 }
 
-                                TagGame::updateOrCreate([
+                                GameTag::updateOrCreate([
                                     'tag_id' => $tag->id,
                                     'game_id' => $game->id,
                                 ]);
@@ -141,7 +141,7 @@ class CrawlerSteam extends Command
                                     ]);
                                 }
 
-                                TagGame::updateOrCreate([
+                                GameTag::updateOrCreate([
                                     'tag_id' => $tag->id,
                                     'game_id' => $game->id,
                                 ]);

@@ -45,7 +45,7 @@ class Game extends BaseModel
     {
         return $this->belongsToMany(Tag::class, 'game_tag');
     }
-    
+
     public function libraries()
     {
         return $this->belongsToMany(Library::class, 'library_games');
@@ -106,7 +106,6 @@ class Game extends BaseModel
             'steam_appid' => $gameData['steam_appid'] ?? null,
             'required_age' => $gameData['required_age'] ?? null,
             'is_free' => $gameData['is_free'] ?? null,
-            'dlc' => $gameData['dlc'] ?? null,
             'detailed_description' => $gameData['detailed_description'] ?? null,
             'about_the_game' => $gameData['about_the_game'] ?? null,
             'short_description' => $gameData['short_description'] ?? null,
@@ -114,10 +113,6 @@ class Game extends BaseModel
             'capsule_image' => $gameData['capsule_image'] ?? null,
             'capsule_imagev5' => $gameData['capsule_imagev5'] ?? null,
             'website' => $gameData['website'] ?? null,
-            'platforms' => $gameData['platforms'] ?? null,
-            'metacritic' => $gameData['metacritic'] ?? null,
-            'recommendations' => $gameData['recommendations'] ?? null,
-            'release_date' => $gameData['release_date'] ?? null,
         ];
     }
 
@@ -150,6 +145,35 @@ class Game extends BaseModel
 
         return $orderedGames->values();
     }
+
+    public function getGameFromPublisherAndDeveloper()
+    {
+        $client = ClientBuilder::create()
+            ->withDriver('bolt', 'bolt://neo4j:7687')
+            ->build();
+
+        $result = $client->run(
+            'MATCH (g:Game {id: $gameId})
+         OPTIONAL MATCH (g)<-[:DEVELOPED]-(d:Developer)-[:DEVELOPED]->(devGame:Game)
+         WHERE devGame.id <> $gameId
+         WITH collect(DISTINCT devGame) AS devGames, g
+         OPTIONAL MATCH (g)<-[:PUBLISHED]-(p:Publisher)-[:PUBLISHED]->(pubGame:Game)
+         WHERE pubGame.id <> $gameId
+         WITH devGames + collect(DISTINCT pubGame) AS games
+         UNWIND games AS other
+         WITH DISTINCT other.id AS gameId
+         LIMIT 20
+         RETURN gameId',
+            ['gameId' => (string) $this->id]
+        );
+
+        $gameIds = collect($result)->pluck('gameId');
+
+        $games = Game::whereIn('id', $gameIds)->get()->keyBy('id');
+
+        return $gameIds->map(fn ($id) => $games[$id])->filter()->values();
+    }
+
 }
 
 

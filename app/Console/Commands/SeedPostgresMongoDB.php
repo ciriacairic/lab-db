@@ -2,13 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Comment;
 use App\Models\Library;
 use App\Models\LibraryGame;
-use App\Models\LibraryUser;
-use App\Models\Report;
-use App\Models\Request;
-use App\Models\Review;
+use App\Models\Mongo\Comment;
+use App\Models\Mongo\GameRequest;
+use App\Models\Mongo\Report;
+use App\Models\Mongo\Review;
 use app\Models\User;
 use App\Models\UserUser;
 use Illuminate\Console\Command;
@@ -38,7 +37,8 @@ class SeedPostgresMongoDB extends Command
         $u1 = User::updateOrCreate([
             'name' => 'u1',],[
             'email' => 'email@gmail.com',
-            'password' => bcrypt('senha'),
+            'handle' => 'u1',
+            'password' => 'senha',
             'nationality' => 'Brasil',
             'gender' => 'male',
             'verified' => 'false',
@@ -49,7 +49,8 @@ class SeedPostgresMongoDB extends Command
         $u2 = User::updateOrCreate([
             'name' => 'u2',],[
             'email' => 'gmail@gmail.com',
-            'password' => bcrypt('senha'),
+            'handle' => 'u2',
+            'password' => 'senha',
             'nationality' => 'Brasil',
             'gender' => 'male',
             'verified' => 'false',
@@ -88,11 +89,6 @@ class SeedPostgresMongoDB extends Command
             'game_id' => 92,
         ],[]);
 
-        LibraryUser::updateOrCreate([
-            'library_id' => $library->id,
-            'user_id' => $u2->id,
-        ],[]);
-
         $review = Review::updateOrCreate([
             'user_id' => $u2->id,
             'game_id' => '14',
@@ -109,7 +105,7 @@ class SeedPostgresMongoDB extends Command
             'rate' => '9',
         ]);
 
-        Request::updateOrCreate([
+        GameRequest::updateOrCreate([
             'user_id' => $u1->id,
             'game_name' => 'Sekiro: Shadows Die Twice',
             'game_description' => 'O jogador assume o papel de um shinobi com uma prótese no lugar do braço, que se vê obrigado a se vingar de um clã samurai que raptou seu mestre e o deixou por morto',

@@ -5,11 +5,11 @@ namespace App\Console\Commands;
 use App\Models\Developer;
 use App\Models\DeveloperGame;
 use App\Models\Game;
+use App\Models\Mongo\Review;
 use App\Models\Publisher;
 use App\Models\PublisherGame;
-use App\Models\Review;
 use App\Models\Tag;
-use App\Models\TagGame;
+use App\Models\GameTag;
 use app\Models\User;
 use App\Models\UserUser;
 use Illuminate\Console\Command;
@@ -152,7 +152,7 @@ class SeedNeo4J extends Command
 
         // Adiciona a relação entre as tags e os jogos
 
-        $gameTags = TagGame::all();
+        $gameTags = GameTag::all();
 
         foreach ($gameTags as $gameTag) {
             $client->run(

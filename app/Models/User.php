@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Library;
-use App\Models\Theme;
+use App\Models\Mongo\Theme;
 
 class User extends Authenticatable
 {
@@ -63,5 +63,20 @@ class User extends Authenticatable
     public function following()
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
+    }
+
+    public function getGamesFromFollowedUsers()
+    {
+        $followingIds = UserUser::where('follower_id', $this->id)->pluck('followed_id')->toArray();
+        $following = User::whereIn('id', $followingIds)->get();
+
+        $games = collect([]);
+        foreach ($following as $f) {
+            $favoritesLibrary = Library::where('owner_id', $f->id)->where('name', 'Favoritos')->get();
+
+            $games = $games->merge(Game::whereIn('id', LibraryGame::where('library_id', $favoritesLibrary->id)->pluck('game_id')->toArray())->get());
+        }
+
+        return $games;
     }
 }

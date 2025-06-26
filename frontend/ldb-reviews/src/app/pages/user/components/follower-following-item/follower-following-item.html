@@ -1,0 +1,8 @@
+<button class="itemContainer" (click)="goToUserProfile()">
+  <section class="imageContainer">
+    <img class="userImage" [src]="userInfo()" alt="User Image">
+  </section>
+  <section class="userInfoContainer">
+    <h2 class="userName">{{ userInfo() }}</h2>
+  </section>
+</button>

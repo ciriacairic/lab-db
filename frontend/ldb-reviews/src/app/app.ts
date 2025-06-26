@@ -22,6 +22,11 @@ export class App {
       console.warn('Search input event target is not an HTMLInputElement');
   }
 
+  onHomeClick()
+  {
+    this._router.navigate(['/']);
+  }
+
   onLoginClick()
   {
     this._router.navigate(['/login']);

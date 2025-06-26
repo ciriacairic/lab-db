@@ -6,7 +6,8 @@ import { Search } from './pages/search/search.component';
 import { ReviewRead } from './pages/review-read/review-read.component';
 import { ReviewWrite } from './pages/review-write/review-write.component';
 import { User } from './pages/user/user.component';
-import { Library } from './pages/libraries/components/library/library';
+import { Library } from './pages/library/library';
+import { Libraries } from './pages/libraries/libraries';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,10 @@ export const routes: Routes = [
   },
   {
     path: 'library/:libraryId',
-    component: Library,
+    component: Library
   },
+  {
+    path: 'libraries/:userId',
+    component: Libraries
+  }
 ];

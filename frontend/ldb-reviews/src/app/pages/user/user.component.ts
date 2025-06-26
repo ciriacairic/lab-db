@@ -12,7 +12,8 @@ export class User {
   private _route = inject(ActivatedRoute);
   
   userId = signal<string>('');
-
+  currentTab = signal<number>(1);
+  showFollowersFollowingModal = signal<boolean>(false);
   userInfo = signal({
     name: 'Nome do Usuário',
     email: 'sldfjçls@klsjfçlsf',
@@ -42,5 +43,26 @@ export class User {
       console.log(`User ID: ${userId}`);
       this.userId.set(userId);
     });
+  }
+
+  followedUser()
+  {
+
+  }
+
+  closeFollowersFollowingModal()
+  {
+    this.showFollowersFollowingModal.set(false);
+  }
+
+  onFollowerFollowingClick(tab:number)
+  {
+    this.showFollowersFollowingModal.set(true);
+    this.currentTab.set(tab);
+  }
+
+  changeTab(tab: number)
+  {
+    this.currentTab.set(tab);
   }
 }

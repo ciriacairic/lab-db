@@ -6,26 +6,61 @@
       <p class="userJoined">Membro desde: {{ userInfo().joinedDate }}</p>
       <p class="userReviewsCount">Avaliações: {{ userInfo().reviewsCount }}</p>
     </section>
+    <section class="followerButtonsContainer">
+      <section class="followerButtonGroup">
+        <button class="followButton" (click)="onFollowerFollowingClick(1)">
+          Seguidores
+        </button>
+      </section>
+      <section class="followerButtonGroup">
+        <button class="followingButton" (click)="onFollowerFollowingClick(2)">
+          Seguindo
+        </button>
+      </section>
+    </section>
+    <button>
+      Ver Bibliotecas
+    </button>
   </section>
-  <section class="followersContainer">
-    <h3 class="followersTitle">Seguidores</h3>
-    <ul class="followersList">
-      <li class="followerItem">
-        <span class="followerName">{{ follower.name }}</span>
-        <span class="followerEmail">{{ follower.email }}</span>
-      </li>
-    </ul>
-  </section>
-  <section class="followingContainer">
-    <h3 class="followingTitle">Seguindo</h3>
-    <ul class="followingList">
-      <li class="followingItem" *ngFor="let following of userFollowing()">
-        <span class="followingName">{{ following.name }}</span>
-        <span class="followingEmail">{{ following.email }}</span>
-      </li>
-    </ul>
-  </section>
-  <button>
-    Ver Bibliotecas
-  </button>
 </article>
+
+@if(showFollowersFollowingModal())
+{
+  <article class="followersFollowingModal">
+    <header class="modalHeader">
+      <button class="closeButton" (click)="closeFollowersFollowingModal()">
+        Fechar
+      </button>
+    </header>
+    <section class="tabsContainer">
+      <button class="followersTabButton" (click)="changeTab(1)">
+        Seguidores
+      </button>
+      <button class="followingTabButton" (click)="changeTab(2)">
+        Seguindo
+      </button>
+    </section>
+    @switch(currentTab())
+    {
+      @case(1)
+      {
+        <section class="followersContainer">
+          <h3 class="followersTitle">Seguidores</h3>
+          <section class="followList">
+  
+          </section>
+        </section>
+
+      }
+      @case(2)
+      {
+        <section class="followingContainer">
+          <h3 class="followingTitle">Seguindo</h3>
+          <section class="followList">
+            
+          </section>
+        </section>
+      }
+    }
+  </article>
+}

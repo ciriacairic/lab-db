@@ -1,0 +1,119 @@
+@use 'styles' as *;
+
+:host{
+  @include page-host;
+}
+
+.gameComponent {
+  @include page-component;
+}
+
+.gameHeader{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerSeparator{
+  width: 50%;
+}
+
+.gameTitle{
+  margin: 1rem 1rem 0.5rem;
+}
+
+.gameContainer{
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.gameImageContainer{
+  border: inset 10px darkgoldenrod;
+  width: 230px;
+  height: 300px;
+}
+
+.gameImage{
+  width: 230px;
+  height: 300px;
+}
+
+.gameInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.gameInfoCard,
+.gameInfoSubCard{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0px 0px 4px #00000036;
+  border: 2px solid #d3d3d357;
+}
+
+.gameInfoCardTitle{
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.gameInfoSubCardTitle{
+  font-weight: 700;
+  font-size: 1.0rem;
+}
+
+.gameInfoCardContent{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: 0.5rem;
+  width: 100%
+}
+
+.gameInfoSubCardContent{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.contentSeparator{
+  width: 60%;
+  margin: 1rem 0 2rem 0;
+}
+
+.reviewList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+.reviewsContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0px 0px 4px #00000036;
+  border: 2px solid #d3d3d357;
+}

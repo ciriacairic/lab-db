@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+html, body{
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+@mixin page-host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: gray;
+  padding: 2rem;
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+@mixin page-component {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1rem 3rem;
+  box-sizing: border-box;
+  border-radius: 20px;
+  box-shadow: 0px 0px 8px #000000;
+}

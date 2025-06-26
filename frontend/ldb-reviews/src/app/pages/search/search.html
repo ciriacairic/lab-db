@@ -1,0 +1,14 @@
+<article class="searchComponent">
+  <section class="searchResultsHeader">
+    <h2 class="searchResultsTitle">Resultados da Busca</h2>
+  </section>
+
+  <section class="searchResultsContainer">
+    @for(game of searchResults(); track $index)
+    {
+      <app-game-card class="searchResultItem">
+        {{ game.name }}
+      </app-game-card>
+    }
+  </section>
+</article>

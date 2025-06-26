@@ -1,0 +1,9 @@
+@use 'styles' as *;
+
+:host{
+  @include page-host;
+}
+
+.librariesComponent {
+  @include page-component;
+}

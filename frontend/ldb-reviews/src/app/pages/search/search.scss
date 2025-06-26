@@ -1,0 +1,17 @@
+@use 'styles' as *;
+
+:host{
+  @include page-host;
+}
+
+.searchComponent{
+  @include page-component;
+}
+
+.searchResultsContainer{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}

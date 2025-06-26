@@ -1,0 +1,15 @@
+<article class="librariesComponent">
+  <section class="librariesContainer">
+    <h1 class="librariesTitle">Bibliotecas</h1>
+    <section class="libraryList">
+      @for(library of libraries(); track $index) 
+      {
+        <button class="libraryCard" (click)="onLibraryClick()">
+          <section class="libraryInfo">
+            <h2 class="libraryName">{{ library.name }}</h2>
+          </section>
+        </button>
+      }
+    </section>
+  </section>
+</article>

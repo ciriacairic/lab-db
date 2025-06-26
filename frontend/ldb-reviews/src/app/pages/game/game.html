@@ -1,0 +1,104 @@
+<article class="gameComponent">
+  <header class="gameHeader">
+    <h2 class="gameTitle">{{ gameInfo().nome }}</h2>
+    <hr class="headerSeparator">
+  </header>
+  <section class="gameContainer">
+    <section class="gameImageContainer">
+      <img 
+        class="gameImage" 
+        src="https://upload.wikimedia.org/wikipedia/pt/0/0d/Elden_Ring_capa.jpg" 
+      >
+    </section>
+
+    <section class="gameInfo">
+      <section class="gameInfoSubCard">
+        <span class="gameInfoCardTitle">Descrição:</span>
+        <section class="gameInfoSubCardContent">
+          <span>{{ gameInfo().descricao }}</span>
+        </section>
+      </section>
+
+      <section class="gameInfoCard">
+        <span class="gameInfoCardTitle">Informações:</span>
+        <section class="gameInfoCardContent">
+
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Lançamento:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().dataLancamento }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Classificação Etária:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().classificacaoEtaria }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Desenvolvedora:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().desenvolvedora }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Publicadora:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().publicadora }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Plataformas:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().plataformas }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Gêneros:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().genero }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Tags:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().tags }}</span>
+            </section>
+          </section>
+        </section>
+      </section>
+
+      <section class="gameInfoCard">
+        <span class="gameInfoCardTitle">Notas:</span>
+        <section class="gameInfoCardContent">
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Nota Técnica:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().notaTecnica }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Nota Subjetiva:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().notaSubjetiva }}</span>
+            </section>
+          </section>
+        </section>
+      </section>
+
+    </section>
+  </section>
+
+  <hr class="contentSeparator">
+
+  <section class="reviewsContainer">
+    <h3 class="reviewsTitle">Avaliações</h3>
+    <section class="reviewList">
+      @for(review of gameInfo().reviews; track $index)
+      {
+        <app-review-card [review]="review"></app-review-card>
+      }
+    </section>
+  </section>
+
+</article>

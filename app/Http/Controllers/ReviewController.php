@@ -20,10 +20,20 @@ class ReviewController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
+        $game_id = request()->input('game_id', null);
+        $user_id = request()->input('user_id', null);
+        $markdown_text = request()->input('markdown_text', null);
+        $scores = request()->input('scores', null);
+        $comments = request()->input('comments', null);
 
         try {
-            $review = Review::create($data);
+            $review = Review::create([
+                'game_id' => $game_id,
+                'user_id' => $user_id,
+                'markdown_text' => $markdown_text,
+                'scores' => $scores,
+                'comments' => $comments,
+            ]);
         } catch (\Throwable $th) {
             return response()->json(['error' => 'Invalid request'], 400);
         }

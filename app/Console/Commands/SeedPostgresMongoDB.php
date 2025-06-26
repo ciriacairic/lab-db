@@ -35,9 +35,9 @@ class SeedPostgresMongoDB extends Command
     {
         // Criação de 2 users
         $u1 = User::updateOrCreate([
-            'name' => 'u1',],[
+            'handle' => 'u1',],[
+            'name' => 'u1',
             'email' => 'email@gmail.com',
-            'handle' => 'u1',
             'password' => 'senha',
             'nationality' => 'Brasil',
             'gender' => 'male',
@@ -47,9 +47,9 @@ class SeedPostgresMongoDB extends Command
         ]);
 
         $u2 = User::updateOrCreate([
-            'name' => 'u2',],[
+            'handle' => 'u2',],[
+            'name' => 'u2',
             'email' => 'gmail@gmail.com',
-            'handle' => 'u2',
             'password' => 'senha',
             'nationality' => 'Brasil',
             'gender' => 'male',
@@ -92,17 +92,20 @@ class SeedPostgresMongoDB extends Command
         $review = Review::updateOrCreate([
             'user_id' => $u2->id,
             'game_id' => '14',
-            'text' => 'Nunca pensei que passaria tanto tempo em um jogo de fazendinha',
-            'graphics' => 10,
-            'gameplay' => '10',
-            'nostalgic' => '10',
+            'comments' => 'Nunca pensei que passaria tanto tempo em um jogo de fazendinha',
+            'scores' => [
+                'graphics' => 10,
+                'gameplay' => '10',
+                'nostalgic' => '10',
+            ]
         ]);
 
         Comment::updateOrCreate([
             'user_id' => $u1->id,
             'parent_id' => $review->_id,
+            'parent_type' => 'review',
             'text' => 'Vc nem ve o tempo passar enquanto pesca',
-            'rate' => '9',
+            'thumbs_up' => 'thumbs_up',
         ]);
 
         GameRequest::updateOrCreate([

@@ -24,7 +24,7 @@ class LibraryController extends Controller
             return response()->json(['error' => 'Invalid request'], 400);
         }
 
-        return response()->json($library->id, 201);
+        return response()->json(["library_id" => $library->id], 201);
     }
 
     public function destroy($library_id){
@@ -58,8 +58,8 @@ class LibraryController extends Controller
 
     public function get_games($library_id)
     {
-        $gameIds = Library::where('library_id', $library_id)->pluck('game_id')->toArray();
-        $games = Game::whereIn('id', $gameIds)->get();
+        $gameIds = LibraryGame::where('library_id', $library_id)->pluck('game_id')->toArray();
+        $games = Game::whereIn('id', $gameIds)->select('name', 'id')->get();
 
         return response()->json($games);
     }

@@ -19,6 +19,5 @@ class Review extends Model
 
     protected $casts = [
         'scores' => 'array',
-        'comments' => 'array',
     ];
 }

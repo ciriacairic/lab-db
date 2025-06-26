@@ -130,6 +130,8 @@ return new class extends Migration
                 ->constrained('games')
                 ->onDelete('cascade');
 
+            $table->unique(['library_id', 'game_id']);
+
             $table->timestamps();
         });
 

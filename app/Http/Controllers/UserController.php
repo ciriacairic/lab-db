@@ -57,7 +57,9 @@ class UserController extends Controller
             return response()->json(['error' => 'User not found'], 404);
         }
 
-        $followers = $user->followers()->select('id', 'name', 'avatar')->get();
+        $followerIds = UserUser::where('followed_id', $user->id)->pluck('follower_id')->toArray();
+
+        $followers = User::whereIn('id', $followerIds)->select('id', 'name', 'avatar')->get();
 
         return response()->json($followers);
     }
@@ -70,9 +72,11 @@ class UserController extends Controller
             return response()->json(['error' => 'User not found'], 404);
         }
 
-        $followers = $user->following()->select('id', 'name', 'avatar')->get();
+        $followedIds = UserUser::where('follower_id', $user->id)->pluck('followed_id')->toArray();
 
-        return response()->json($followers);
+        $following = User::whereIn('id', $followedIds)->select('id', 'name', 'avatar')->get();
+
+        return response()->json($following);
     }
 
     public function show($user_id)
@@ -91,7 +95,15 @@ class UserController extends Controller
     {
         $user = User::find($user_id);
 
-        $user->status = 'banned';
+        try {
+            if ($user->status == 'banned') {
+                $user->status = 'active';
+            } else {
+                $user->status = 'banned';
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false], 401);
+        }
 
         $user->save();
 
@@ -100,7 +112,7 @@ class UserController extends Controller
 
     public function destroy($user_id)
     {
-        $user = User::find('user_id', $user_id);
+        $user = User::find($user_id);
 
         $user->delete();
 
@@ -128,15 +140,20 @@ class UserController extends Controller
 
     public function update(Request $request, $user_id)
     {
-        $data = $request->except('user_id');
+        $data = $request->query('data', []);
 
-        try {
-            User::where('id', $user_id)->update($data);
-        } catch (\Throwable $th) {
-            return response()->json(['error' => 'Invalid request'], 400);
+        if (!is_array($data)) {
+            return response()->json(['error' => 'Invalid data format'], 422);
         }
 
-        return response()->json(['success' => true]);
+        try {
+            $user = User::findOrFail($user_id);
+            $user->update($data);
+
+            return response()->json(['message' => 'User updated successfully', 'user' => $user]);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
     }
 
     public function get_libraries($user_id)
@@ -146,11 +163,11 @@ class UserController extends Controller
 
     public function get_reviews($user_id)
     {
-        return Review::where('user_id', $user_id)->get();
+        return response()->json(Review::where('user_id', (int) $user_id)->get());
     }
 
     public function get_comments($user_id)
     {
-        return Comment::where('user_id', $user_id)->get();
+        return response()->json(Comment::where('user_id', (int) $user_id)->get());
     }
 }

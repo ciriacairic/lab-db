@@ -10,11 +10,12 @@ class Comment extends Model
     protected $collection = 'comments';
 
     protected $fillable = [
-        'review_id',
-        'parent_comment_id',
+        'parent_id',
+        'parent_type',
         'user_id',
         'text',
-        'thumbs_up', 'thumbs_down',
+        'thumbs_up',
+        'thumbs_down',
         'reports'
     ];
 

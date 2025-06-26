@@ -34,11 +34,8 @@ class CommentController extends Controller
         return response()->json(['success' => true, 'review_id' => $comment->id], 201);
     }
 
-    public function show(Request $request)
+    public function show($parent_id, $parent_type)
     {
-        $parent_id = $request->input('parent_id');
-        $parent_type = $request->input('parent_type');
-
         $comments = Comment::where('parent_id', $parent_id)->where('parent_type', $parent_type)->get();
 
         return response()->json(['success' => true, 'comments' => $comments], 200);

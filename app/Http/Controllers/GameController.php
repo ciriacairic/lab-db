@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Developer;
+use App\Models\DeveloperGame;
 use App\Models\Game;
+use App\Models\GamePlatform;
 use App\Models\Mongo\Review;
+use App\Models\Platform;
+use App\Models\Publisher;
+use App\Models\PublisherGame;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -22,10 +28,9 @@ class GameController extends Controller
         return response()->json($game);
     }
 
-    public function search(Request $request)
+    public function search($search_term)
     {
-        $search = $request->get('search_term');
-        $games = Game::where('name', 'like', "%{$search}%")->select('id','name')->get();
+        $games = Game::where('name', 'like', "%{$search_term}%")->select('id','name')->get();
 
         return response()->json($games);
     }
@@ -54,6 +59,13 @@ class GameController extends Controller
         $capsule_image        = $request->input('capsule_image', null);
         $capsule_imagev5      = $request->input('capsule_imagev5', null);
         $website              = $request->input('website', null);
+        $release_date         = $request->input('release_date', null);
+        $closure_date         = $request->input('closure_date', null);
+        $publisherName        = $request->input('publisher', null);
+        $developerName        = $request->input('developer', null);
+        $franchise            = $request->input('franchise', null);
+        $platforms            = $request->input('platform', []);
+
 
         try {
             $game = Game::create([
@@ -68,7 +80,58 @@ class GameController extends Controller
                 'capsule_image'        => $capsule_image,
                 'capsule_imagev5'      => $capsule_imagev5,
                 'website'              => $website,
+                'release_date'         => $release_date,
+                'closure_date'         => $closure_date,
+                'franchise'            => $franchise,
             ]);
+
+            if ($publisherName) {
+                $publisher = Publisher::where('name', $publisherName)->first();
+
+                if (!$publisher) {
+                    $publisher = Publisher::create([
+                        'name' => $publisherName,
+                    ]);
+                }
+
+                PublisherGame::updateOrCreate([
+                    'publisher_id' => $publisher->id,
+                    'game_id' => $game->id,
+                ]);
+            }
+
+            if ($developerName) {
+                $developer = Developer::where('name', $developerName)->first();
+
+                if (!$developer) {
+                    $developer = Developer::create([
+                        'name' => $developerName,
+                    ]);
+                }
+
+                DeveloperGame::updateOrCreate([
+                    'developer_id' => $developer->id,
+                    'game_id' => $game->id,
+                ]);
+            }
+
+
+            foreach($platforms as $platformName) {
+                $platform = Platform::where('name', $platformName)->first();
+
+                if (!$platform) {
+                    $platform = Platform::create([
+                        'name' => $platformName,
+                    ]);
+                }
+
+                GamePlatform::updateOrCreate([
+                    'platform_id' => $platform->id,
+                    'game_id' => $game->id,
+                ]);
+            }
+
+
         } catch (\Throwable $th) {
             return response()->json(['error' => 'Invalid request'], 400);
         }

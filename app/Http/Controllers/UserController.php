@@ -30,6 +30,8 @@ class UserController extends Controller
         $password = $request->input('password');
         $handle = $request->input('handle');
         $birth_date = $request->input('birth_date');
+        $nationality = $request->input('nacionality');
+        $gender = $request->input('gender');
 
         try {
             $user = User::create([
@@ -37,7 +39,9 @@ class UserController extends Controller
                 'email'    => $email,
                 'password' => $password,
                 'handle'   => $handle,
-                'birth_date' => $birth_date
+                'birth_date' => $birth_date,
+                'nationality' => $nationality,
+                'gender'    => $gender,
             ]);
         } catch (\Throwable $th) {
             return response()->json(['success' => false, 'user_id' => null], 401);

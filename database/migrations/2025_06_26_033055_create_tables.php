@@ -60,6 +60,9 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->decimal('technical_score', 4, 2)->nullable();
             $table->decimal('subjective_score', 4, 2)->nullable();
+            $table->string('release_date')->nullable();
+            $table->string('closure_date')->nullable();
+            $table->string('franchise')->nullable();
             $table->timestamps();
         });
 

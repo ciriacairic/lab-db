@@ -36,7 +36,7 @@ Route::get('/library/{library_id}', [LibraryController::class, 'get_games'])->na
 Route::post('/review', [ReviewController::class, 'store'])->name('review.store');
 Route::delete('/review/{review_id}', [ReviewController::class, 'destroy'])->name('review.destroy');
 
-Route::get('/comment', [CommentController::class, 'show'])->name('comment.show');
+Route::get('/comment/{parent_id}/{parent_type}', [CommentController::class, 'show'])->name('comment.show');
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::delete('/comment/{comment_id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
@@ -51,7 +51,7 @@ Route::get('/report', [ReportController::class, 'index'])->name('report.index');
 Route::delete('/report/{report_id}', [ReportController::class, 'destroy'])->name('report.destroy');
 
 Route::get('/game/{game_id}/reviews', [GameController::class, 'reviews'])->name('game.reviews');
-Route::get('/game/search', [GameController::class, 'search'])->name('games.search');
+Route::get('/game/search/{search_term}', [GameController::class, 'search'])->name('games.search');
 Route::get('/game/{game_id}', [GameController::class, 'show'])->name('game.show');
 Route::post('/game', [GameController::class, 'store'])->name('game.store');
 Route::delete('/game/{game_id}', [GameController::class, 'destroy'])->name('game.destroy');

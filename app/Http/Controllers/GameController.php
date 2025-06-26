@@ -24,6 +24,18 @@ class GameController extends Controller
 
         $game->technical_score = $game->getTechnicalScoreAttribute();
         $game->subjective_score = $game->getSubjectiveScoreAttribute();
+        $developerGame = DeveloperGame::where('game_id', $game_id)->first();
+        if ($developerGame) {
+            $game->developer = Developer::where('id', $developerGame->developer_id)->first()->name;
+        }
+        $publisherGame = PublisherGame::where('game_id', $game_id)->first();
+        if ($publisherGame) {
+            $game->publisher = Publisher::where('id', $publisherGame->publisher_id)->first()->name;
+        }
+        $platformIds = GamePlatform::where('game_id', $game_id)->pluck('platform_id')->toArray();
+        if ($platformIds) {
+            $game->platforms = Platform::whereIn('id', $platformIds)->get()->pluck('name')->toArray();
+        }
 
         return response()->json($game);
     }

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { ReviewCard } from "./components/review-card/review-card.component";
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,7 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class Game {
   private _route = inject(ActivatedRoute);
-
+  private _changeDetectionRef = inject(ChangeDetectorRef)
+  ;
   gameId = signal<string>('');
   gameInfo = signal({
     nome: 'Elden Ring',
@@ -21,7 +22,7 @@ export class Game {
     publicadora: 'Bandai Namco Entertainment',
     dataLancamento: '25 de fevereiro de 2022',
     plataformas: ['PlayStation 4', 'PlayStation 5', 'Xbox One', 'Xbox Series X/S', 'PC'],
-    imagem: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nuuvem.com%2Fbr-pt%2Fitem%2Felden-ring&psig=AOvVaw1ggRGYz1Ivx5qgsXywDLE9&ust=1750996629201000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMChqfOYjo4DFQAAAAAdAAAAABAE',
+    imagem: 'https://pt.wikipedia.org/wiki/Ficheiro:Elden_Ring_capa.jpg',
     notaTecnica: 9.5,
     notaSubjetiva: 10,
     tags: ['Aventura', 'Mundo Aberto', 'Fantasia', 'Desafio'],
@@ -53,4 +54,9 @@ export class Game {
       this.gameId.set(`Detalhes da review com ID: ${reviewId}`);
     });
   }
+
+  ngOnInit() {
+    this._changeDetectionRef.detectChanges();
+  }
+
 }

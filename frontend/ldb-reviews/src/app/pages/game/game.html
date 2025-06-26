@@ -1,24 +1,35 @@
 <article class="gameComponent">
+  <header class="gameHeader">
+    <h2 class="gameTitle">{{ gameInfo().nome }}</h2>
+    <hr class="headerSeparator">
+  </header>
   <section class="gameContainer">
     <section class="gameImageContainer">
       <img 
         class="gameImage" 
-        [src]="gameInfo().imagem" 
+        src="https://upload.wikimedia.org/wikipedia/pt/0/0d/Elden_Ring_capa.jpg" 
       >
     </section>
 
     <section class="gameInfo">
-      <h2 class="gameTitle">{{ gameInfo().nome }}</h2>
-      <p class="gameDescription">Descrição: {{ gameInfo().descricao }}</p>
-      <p class="gameStatus">Nota Técnica{{ gameInfo().notaTecnica }}</p>
-      <p class="gameScore">Nota Subjetiva: {{ gameInfo().notaSubjetiva }}</p>
-      <p class="gameReleaseDate">Lançamento: {{ gameInfo().dataLancamento }}</p>
-      <p class="gameClassificaçãoEtaria">Classificação Etária: {{ gameInfo().classificacaoEtaria }}</p>
-      <p class="gameDesenvolvedora">Desenvolvedora: {{ gameInfo().desenvolvedora }}</p>
-      <p class="gamePublicadora">Publicadora: {{ gameInfo().publicadora }}</p>
-      <p class="gamePlataformas">Plataformas: {{ gameInfo().plataformas }}</p>
-      <p class="gameGenres">Gêneros: {{ gameInfo().genero}}</p>
-      <p class="gameTags">Tags: {{ gameInfo().tags}}
+      <section class="descricaoContainer">
+        <span class="gameDescription">Descrição: {{ gameInfo().descricao }}</span>
+      </section>
+
+      <section class="notasContainer">
+        <span class="gameStatus">Nota Técnica{{ gameInfo().notaTecnica }}</span>
+        <span class="gameScore">Nota Subjetiva: {{ gameInfo().notaSubjetiva }}</span>
+      </section>
+      
+      <section class="miscInfoContainer">
+        <span class="gameReleaseDate">Lançamento: {{ gameInfo().dataLancamento }}</span>
+        <span class="gameClassificaçãoEtaria">Classificação Etária: {{ gameInfo().classificacaoEtaria }}</span>
+        <span class="gameDesenvolvedora">Desenvolvedora: {{ gameInfo().desenvolvedora }}</span>
+        <span class="gamePublicadora">Publicadora: {{ gameInfo().publicadora }}</span>
+        <span class="gamePlataformas">Plataformas: {{ gameInfo().plataformas }}</span>
+        <span class="gameGenres">Gêneros: {{ gameInfo().genero}}</span>
+        <span class="gameTags">Tags: {{ gameInfo().tags}}</span>
+      </section>
     </section>
   </section>
 

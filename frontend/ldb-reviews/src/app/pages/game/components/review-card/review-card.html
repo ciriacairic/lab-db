@@ -1,0 +1,12 @@
+<button class="reviewCard" (click)="onReviewClick()">
+  <section class="reviewCardContainer">
+    <section class="reviewCardInfo">
+      <h2 class="reviewCardTitle">{{ review().titulo }}</h2>
+      <p class="reviewCardDescription">{{ review().conteudo }}</p>
+      <p class="reviewCardRating">Avaliação: {{ review().notaTecnica }}</p>
+      <p class="reviewCardAuthor">Autor: {{ review().autor }}</p>
+      <p class="reviewCardDate">Data: {{ review().data }}</p>
+    </section>
+  </section>
+
+</button>

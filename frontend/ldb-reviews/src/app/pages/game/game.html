@@ -1,0 +1,35 @@
+<article class="gameComponent">
+  <section class="gameContainer">
+    <section class="gameImageContainer">
+      <img 
+        class="gameImage" 
+        [src]="gameInfo().imagem" 
+      >
+    </section>
+
+    <section class="gameInfo">
+      <h2 class="gameTitle">{{ gameInfo().nome }}</h2>
+      <p class="gameDescription">Descrição: {{ gameInfo().descricao }}</p>
+      <p class="gameStatus">Nota Técnica{{ gameInfo().notaTecnica }}</p>
+      <p class="gameScore">Nota Subjetiva: {{ gameInfo().notaSubjetiva }}</p>
+      <p class="gameReleaseDate">Lançamento: {{ gameInfo().dataLancamento }}</p>
+      <p class="gameClassificaçãoEtaria">Classificação Etária: {{ gameInfo().classificacaoEtaria }}</p>
+      <p class="gameDesenvolvedora">Desenvolvedora: {{ gameInfo().desenvolvedora }}</p>
+      <p class="gamePublicadora">Publicadora: {{ gameInfo().publicadora }}</p>
+      <p class="gamePlataformas">Plataformas: {{ gameInfo().plataformas }}</p>
+      <p class="gameGenres">Gêneros: {{ gameInfo().genero}}</p>
+      <p class="gameTags">Tags: {{ gameInfo().tags}}
+    </section>
+  </section>
+
+  <section class="reviewsContainer">
+    <h3 class="reviewsTitle">Avaliações</h3>
+    <section class="reviewList">
+      @for(review of gameInfo().reviews; track $index)
+      {
+        <app-review-card [review]="review"></app-review-card>
+      }
+    </section>
+  </section>
+
+</article>

@@ -1,0 +1,31 @@
+<article class="readReviewComponent">
+  <section class="readReviewContainer">
+
+    <section class="reviewImageContainer">
+      <img 
+        class="reviewImage" 
+        [src]="reviewInfo()" 
+      >
+    </section>
+
+    <section class="reviewInfo">
+      <h2 class="reviewTitle">{{ reviewInfo().title }}</h2>
+      <p class="reviewDescription">Descrição: {{ reviewInfo().content }}</p>
+      <p class="reviewAuthor">Autor: {{ reviewInfo().autor }}</p>
+      <p class="reviewDate">Data: {{ reviewInfo().data }}</p>
+      <p class="reviewRating">Nota Técnica: {{ reviewInfo().notaTecnica }}</p>
+      <p class="reviewRating">Nota Subjetiva: {{ reviewInfo().notaTecnica }}</p>
+    </section>
+
+  </section>
+
+  <section class="commentsContainer">
+    <h3 class="commentsTitle">Comentários</h3>
+    <section class="commentList">
+      @for(comment of reviewInfo().comentarios; track $index) {
+        <app-comments [comment]="comment"></app-comments>
+      }
+    </section>
+
+  </section>
+</article>

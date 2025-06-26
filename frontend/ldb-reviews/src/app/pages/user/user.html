@@ -1,0 +1,31 @@
+<article class="userComponent">
+  <section class="userContainer">
+    <section class="userProfile">
+      <h2 class="userName">{{ userInfo().name }}</h2>
+      <p class="userEmail">Email: {{ userInfo().email }}</p>
+      <p class="userJoined">Membro desde: {{ userInfo().joinedDate }}</p>
+      <p class="userReviewsCount">Avaliações: {{ userInfo().reviewsCount }}</p>
+    </section>
+  </section>
+  <section class="followersContainer">
+    <h3 class="followersTitle">Seguidores</h3>
+    <ul class="followersList">
+      <li class="followerItem">
+        <span class="followerName">{{ follower.name }}</span>
+        <span class="followerEmail">{{ follower.email }}</span>
+      </li>
+    </ul>
+  </section>
+  <section class="followingContainer">
+    <h3 class="followingTitle">Seguindo</h3>
+    <ul class="followingList">
+      <li class="followingItem" *ngFor="let following of userFollowing()">
+        <span class="followingName">{{ following.name }}</span>
+        <span class="followingEmail">{{ following.email }}</span>
+      </li>
+    </ul>
+  </section>
+  <button>
+    Ver Bibliotecas
+  </button>
+</article>

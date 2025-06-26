@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GameRequestController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReviewController;
@@ -54,3 +55,5 @@ Route::get('/game/search', [GameController::class, 'search'])->name('games.searc
 Route::get('/game/{game_id}', [GameController::class, 'show'])->name('game.show');
 Route::post('/game', [GameController::class, 'store'])->name('game.store');
 Route::delete('/game/{game_id}', [GameController::class, 'destroy'])->name('game.destroy');
+
+Route::get('/home/{user_id}', [HomeController::class, 'index'])->name('home');

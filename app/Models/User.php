@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Models;
+namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Library;
 use App\Models\Mongo\Theme;
+use App\Models\UserUser;
 
 class User extends Authenticatable
 {
@@ -43,6 +44,12 @@ class User extends Authenticatable
                 'description' => 'Biblioteca de favoritos',
             ]);
 
+            Library::create([
+                'owner_id' => $user->id,
+                'name' => 'Jogados',
+                'description' => 'Biblioteca de jogos jogados',
+            ]);
+
             Theme::create([
                 'user_id' => $user->id,
                 'name' => 'Padrão',
@@ -67,16 +74,33 @@ class User extends Authenticatable
 
     public function getGamesFromFollowedUsers()
     {
-        $followingIds = UserUser::where('follower_id', $this->id)->pluck('followed_id')->toArray();
-        $following = User::whereIn('id', $followingIds)->get();
+        $followingIds = UserUser::where('follower_id', $this->id)->pluck('followed_id');
 
-        $games = collect([]);
-        foreach ($following as $f) {
-            $favoritesLibrary = Library::where('owner_id', $f->id)->where('name', 'Favoritos')->get();
+        $gameFrequency = [];
 
-            $games = $games->merge(Game::whereIn('id', LibraryGame::where('library_id', $favoritesLibrary->id)->pluck('game_id')->toArray())->get());
+        foreach ($followingIds as $followedId) {
+            $favoriteLibraries = Library::where('owner_id', $followedId)
+                ->where('name', 'Favoritos')
+                ->pluck('id');
+
+            $gameIds = LibraryGame::whereIn('library_id', $favoriteLibraries)->pluck('game_id');
+
+            foreach ($gameIds as $gameId) {
+                if (isset($gameFrequency[$gameId])) {
+                    $gameFrequency[$gameId]++;
+                } else {
+                    $gameFrequency[$gameId] = 1;
+                }
+            }
         }
 
-        return $games;
+        $topGameIds = collect($gameFrequency)
+            ->sortDesc()
+            ->take(20)
+            ->keys();
+
+        $games = Game::whereIn('id', $topGameIds)->get()->keyBy('id');
+
+        return $topGameIds->map(fn($id) => $games[$id])->filter()->values();
     }
 }

@@ -154,16 +154,18 @@ class Game extends BaseModel
 
         $result = $client->run(
             'MATCH (g:Game {id: $gameId})
-         OPTIONAL MATCH (g)<-[:DEVELOPED]-(d:Developer)-[:DEVELOPED]->(devGame:Game)
-         WHERE devGame.id <> $gameId
-         WITH collect(DISTINCT devGame) AS devGames, g
-         OPTIONAL MATCH (g)<-[:PUBLISHED]-(p:Publisher)-[:PUBLISHED]->(pubGame:Game)
-         WHERE pubGame.id <> $gameId
-         WITH devGames + collect(DISTINCT pubGame) AS games
-         UNWIND games AS other
-         WITH DISTINCT other.id AS gameId
-         LIMIT 20
-         RETURN gameId',
+
+     OPTIONAL MATCH (g)<-[:DEVELOPED]-(d:Developer)-[:DEVELOPED]->(devGame:Game)
+     WHERE devGame.id <> $gameId
+
+     OPTIONAL MATCH (g)<-[:PUBLISHED]-(p:Publisher)-[:PUBLISHED]->(pubGame:Game)
+     WHERE pubGame.id <> $gameId
+
+     WITH collect(DISTINCT devGame) + collect(DISTINCT pubGame) AS allGames
+     UNWIND allGames AS other
+     WITH DISTINCT other.id AS gameId
+     LIMIT 20
+     RETURN gameId',
             ['gameId' => (string) $this->id]
         );
 

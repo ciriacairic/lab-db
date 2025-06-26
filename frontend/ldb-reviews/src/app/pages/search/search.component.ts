@@ -1,8 +1,9 @@
 import { Component, input, signal } from '@angular/core';
+import { GameCard } from "./components/game-card/game-card.component";
 
 @Component({
   selector: 'app-search',
-  imports: [],
+  imports: [GameCard],
   standalone: true,
   templateUrl: './search.html',
   styleUrl: './search.scss'

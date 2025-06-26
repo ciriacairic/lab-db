@@ -6,9 +6,9 @@
   <section class="searchResultsContainer">
     @for(game of searchResults(); track $index)
     {
-      <li class="searchResultItem">
+      <app-game-card class="searchResultItem">
         {{ game.name }}
-      </li>
+      </app-game-card>
     }
   </section>
 </article>

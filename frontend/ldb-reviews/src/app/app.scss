@@ -14,6 +14,7 @@
   border: none;
   width: 50%;
   text-align: left;
+  cursor: pointer;
 }
 
 .searchGroup{
@@ -34,6 +35,7 @@
   border: none;
   right: 50px;
   top: 6px;
+  cursor: pointer;
 }
 
 .headerLoginButton{
@@ -41,4 +43,5 @@
   border: none;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }

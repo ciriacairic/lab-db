@@ -12,26 +12,84 @@
     </section>
 
     <section class="gameInfo">
-      <section class="descricaoContainer">
-        <span class="gameDescription">Descrição: {{ gameInfo().descricao }}</span>
+      <section class="gameInfoSubCard">
+        <span class="gameInfoCardTitle">Descrição:</span>
+        <section class="gameInfoSubCardContent">
+          <span>{{ gameInfo().descricao }}</span>
+        </section>
       </section>
 
-      <section class="notasContainer">
-        <span class="gameStatus">Nota Técnica{{ gameInfo().notaTecnica }}</span>
-        <span class="gameScore">Nota Subjetiva: {{ gameInfo().notaSubjetiva }}</span>
+      <section class="gameInfoCard">
+        <span class="gameInfoCardTitle">Informações:</span>
+        <section class="gameInfoCardContent">
+
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Lançamento:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().dataLancamento }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Classificação Etária:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().classificacaoEtaria }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Desenvolvedora:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().desenvolvedora }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Publicadora:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().publicadora }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Plataformas:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().plataformas }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Gêneros:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().genero }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Tags:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().tags }}</span>
+            </section>
+          </section>
+        </section>
       </section>
-      
-      <section class="miscInfoContainer">
-        <span class="gameReleaseDate">Lançamento: {{ gameInfo().dataLancamento }}</span>
-        <span class="gameClassificaçãoEtaria">Classificação Etária: {{ gameInfo().classificacaoEtaria }}</span>
-        <span class="gameDesenvolvedora">Desenvolvedora: {{ gameInfo().desenvolvedora }}</span>
-        <span class="gamePublicadora">Publicadora: {{ gameInfo().publicadora }}</span>
-        <span class="gamePlataformas">Plataformas: {{ gameInfo().plataformas }}</span>
-        <span class="gameGenres">Gêneros: {{ gameInfo().genero}}</span>
-        <span class="gameTags">Tags: {{ gameInfo().tags}}</span>
+
+      <section class="gameInfoCard">
+        <span class="gameInfoCardTitle">Notas:</span>
+        <section class="gameInfoCardContent">
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Nota Técnica:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().notaTecnica }}</span>
+            </section>
+          </section>
+          <section class="gameInfoSubCard">
+            <span class="gameInfoSubCardTitle">Nota Subjetiva:</span>
+            <section class="gameInfoSubCardContent">
+              <span class="gameReleaseDate">{{ gameInfo().notaSubjetiva }}</span>
+            </section>
+          </section>
+        </section>
       </section>
+
     </section>
   </section>
+
+  <hr class="contentSeparator">
 
   <section class="reviewsContainer">
     <h3 class="reviewsTitle">Avaliações</h3>

@@ -30,7 +30,7 @@ class GameController extends Controller
 
     public function search($search_term)
     {
-        $games = Game::where('name', 'like', "%{$search_term}%")->select('id','name')->get();
+        $games = Game::where('name', 'like', "%{$search_term}%")->select('id','name', 'capsule_image')->get();
 
         return response()->json($games);
     }

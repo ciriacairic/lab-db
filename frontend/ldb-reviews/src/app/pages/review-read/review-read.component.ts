@@ -25,7 +25,7 @@ export class ReviewRead {
   {
     this._route.params.subscribe(params => {
       const reviewId = params['reviewId'];
-      this.reviewId.set(`Detalhes da review com ID: ${reviewId}`);
+      this.reviewId.set(reviewId);
     });
   }
   

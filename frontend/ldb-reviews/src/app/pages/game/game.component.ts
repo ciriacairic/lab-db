@@ -5,6 +5,7 @@ import { Backend } from '../../services/backend';
 import { GetGameResponse } from '../../interfaces/responses/getGameResponse';
 import { Store } from '../../services/store';
 import { Spinner } from "../../components/spinner/spinner";
+import { GetReview } from '../../interfaces/responses/getReview';
 
 @Component({
   selector: 'app-game',
@@ -22,7 +23,7 @@ export class Game {
 
   gameId = signal<number>(0);
   gameInfo = signal<GetGameResponse>({} as GetGameResponse);
-  gameReviews = signal([]);
+  gameReviews = signal([] as GetReview[]);
   userId = signal<number>(0);
   libraries = signal<any[]>([]);
   isLoggedIn = signal<boolean>(false);

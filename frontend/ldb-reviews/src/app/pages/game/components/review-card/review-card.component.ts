@@ -1,4 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
+import { GetReview } from '../../../../interfaces/responses/getReview';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-review-card',
@@ -8,15 +10,11 @@ import { Component, input } from '@angular/core';
   styleUrl: './review-card.scss'
 })
 export class ReviewCard {
-  review = input(        {titulo: 'Uma obra-prima',
-        conteudo: 'Elden Ring é um jogo incrível que redefine o gênero de ação/RPG. A história é envolvente e o mundo é vasto e cheio de segredos.',
-        autor: 'Jogador123',
-        data: '2022-03-01',
-        notaTecnica: 9.5,
-        notaSubjetiva: 10}
-      );
+  private _router = inject(Router);
 
-  onReviewClick(){
-    
+  review = input<GetReview>();
+  onReviewClick()
+  {
+    this._router.navigate(['/review', this.review()?.id]);
   }
 }

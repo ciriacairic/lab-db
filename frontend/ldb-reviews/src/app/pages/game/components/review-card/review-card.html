@@ -1,11 +1,16 @@
 <button class="reviewCard" (click)="onReviewClick()">
   <section class="reviewCardContainer">
     <section class="reviewCardInfo">
-      <h2 class="reviewCardTitle">{{ review().titulo }}</h2>
-      <p class="reviewCardDescription">{{ review().conteudo }}</p>
-      <p class="reviewCardRating">Avaliação: {{ review().notaTecnica }}</p>
-      <p class="reviewCardAuthor">Autor: {{ review().autor }}</p>
-      <p class="reviewCardDate">Data: {{ review().data }}</p>
+      <h2 class="reviewCardTitle">{{ review()?.markdown_text }}</h2>
+      <p class="reviewCardRating">Gameplay: {{ review()?.scores?.gameplay }}</p>
+      <p class="reviewCardRating">História: {{ review()?.scores?.story }}</p>
+      <p class="reviewCardRating">Design de Som: {{ review()?.scores?.sound }}</p>
+      <p class="reviewCardRating">Apego Emocional: {{ review()?.scores?.nostalgic }}</p>
+      <p class="reviewCardRating">Gráficos: {{ review()?.scores?.graphics }}</p>
+      <p class="reviewCardAuthor">Autor: {{ review()?.user_id }}</p>
+      <p class="reviewCardDate">Data: {{ review()?.created_at }}</p>
+      <p class="reviewCardGameId">Jogo ID: {{ review()?.game_id }}</p>
+
     </section>
   </section>
 

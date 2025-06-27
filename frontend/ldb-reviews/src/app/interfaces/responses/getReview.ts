@@ -4,5 +4,7 @@ export interface GetReview{
   "game_id": number;
   "user_id": number;
   "markdown_text": string;
-  "scores": Scores
+  "scores": Scores;
+  "id": string;
+  "created_at": string;
 }

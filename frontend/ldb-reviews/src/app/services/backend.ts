@@ -13,7 +13,7 @@ import { PostReportPayload } from '../interfaces/requests/postReportPayload';
 import { PostReportDecicionPayload } from '../interfaces/requests/postReportDecisionPayload';
 import { PostGamePayload } from '../interfaces/requests/postGamePayload';
 import { GetGameResponse } from '../interfaces/responses/getGameResponse';
-import { PostLoginPayload } from '../interfaces/requests/postLoginPayload';
+import { PostLoginPayload } from '../interfaces/requests/postloginPayload';
 
 @Injectable({
   providedIn: 'root'

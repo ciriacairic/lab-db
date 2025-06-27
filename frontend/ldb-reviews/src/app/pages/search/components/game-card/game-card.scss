@@ -1,4 +1,17 @@
+.gameCard{
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  cursor: pointer;
+}
+
 .gameCardImageContainer{
-  width: 100px;
-  height: 200px;
+  width: 231px;
+  height: 87px;
 }

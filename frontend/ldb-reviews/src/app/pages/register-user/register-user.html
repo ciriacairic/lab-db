@@ -1,1 +1,90 @@
-<p>register-user works!</p>
+<article class="loginComponent">
+  <section class="loginFormContainer">
+    <section class="title">
+      <h1>Registro</h1>
+    </section>
+    <section class="loginForm">
+      <section class="inputGroup">
+        <span class="inputLabel">Nome</span>
+        <input 
+          type="text" 
+          class="inputField" 
+          placeholder="Insira seu nome" 
+          (input)="onFieldInput('name', $event)" 
+          name="name" required
+        >
+      </section>
+      <section class="inputGroup">
+        <span class="inputLabel">Email</span>
+        <input 
+          type="text" 
+          class="inputField" 
+          placeholder="Insira seu email ou username" 
+          (input)="onFieldInput('email', $event)" 
+          name="email" required
+        >
+      </section>
+      <section class="inputGroup">
+        <span class="inputLabel">Senha</span>
+        <input 
+          type="password" 
+          class="inputField" 
+          placeholder="Insira sua senha" 
+          (input)="onFieldInput('password', $event)" 
+          name="username" required
+        >
+      </section>
+
+      <section class="inputGroup">
+        <span class="inputLabel">Handle</span>
+        <input 
+          type="text" 
+          class="inputField" 
+          placeholder="Insira sua handle" 
+          (input)="onFieldInput('handle', $event)" 
+          name="handle" required
+        >
+      </section>
+
+      <section class="inputGroup">
+        <span class="inputLabel">Data de nascimento</span>
+        <input 
+          type="text" 
+          class="inputField" 
+          placeholder="Insira sua data de nascimento" 
+          (input)="onFieldInput('birth_date', $event)" 
+          name="birth_date" required
+        >
+      </section>
+
+      <section class="inputGroup">
+        <span class="inputLabel">Nacionalidade</span>
+        <input 
+          type="text" 
+          class="inputField" 
+          placeholder="Insira sua nacionalidade" 
+          (input)="onFieldInput('nationality', $event)" 
+          name="nationality" required
+        >
+      </section>
+
+      <section class="inputGroup">
+        <span class="inputLabel">Gênero</span>
+        <input 
+          type="text" 
+          class="inputField" 
+          placeholder="Insira seu gênero" 
+          (input)="onFieldInput('gender', $event)" 
+          name="gender" required
+        >
+      </section>
+
+      <button
+        class="loginButton"
+        (click)="onRegisterClick()"
+      >
+      Registrar
+      </button>
+    </section>
+  </section>
+</article>

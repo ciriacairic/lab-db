@@ -33,6 +33,7 @@ Route::post('/library/{library_id}/add_game/{game_id}', [LibraryController::clas
 Route::delete('/library/{library_id}/remove_game/{game_id}', [LibraryController::class, 'remove_game'])->name('library.remove_game');
 Route::get('/library/{library_id}', [LibraryController::class, 'get_games'])->name('library.get_games');
 
+Route::get('/review/{review_id}', [ReviewController::class, 'show'])->name('review.show');
 Route::post('/review', [ReviewController::class, 'store'])->name('review.store');
 Route::delete('/review/{review_id}', [ReviewController::class, 'destroy'])->name('review.destroy');
 

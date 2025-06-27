@@ -59,7 +59,7 @@ class LibraryController extends Controller
     public function get_games($library_id)
     {
         $gameIds = LibraryGame::where('library_id', $library_id)->pluck('game_id')->toArray();
-        $games = Game::whereIn('id', $gameIds)->select('name', 'id')->get();
+        $games = Game::whereIn('id', $gameIds)->select('name', 'id', 'capsule_image')->get();
 
         return response()->json($games);
     }

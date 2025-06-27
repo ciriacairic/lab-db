@@ -3,10 +3,12 @@ import { Backend } from '../../services/backend';
 import { PostLoginPayload } from '../../interfaces/requests/postLoginPayload';
 import { Router } from '@angular/router';
 import { Store } from '../../services/store';
+import { Spinner } from "../../components/spinner/spinner";
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [Spinner],
   standalone: true,
   templateUrl: './login.html',
   styleUrl: './login.scss'
@@ -19,6 +21,7 @@ export class Login {
 
   username = signal<string>('');
   password = signal<string>('');
+  loading = signal<boolean>(false);
 
   onFieldInput(field: string, event: any)
   {
@@ -43,14 +46,17 @@ export class Login {
       password: this.password()
     } as PostLoginPayload;
 
+    this.loading.set(true);
     this._backendService.postLogin(payload).subscribe({
       next: (data) => {
+        this.loading.set(false);
         console.log('Login successful:', data);
         this._store.guardarItem('current_user', data.user_id);
         this._changeDetectorRef.detectChanges();
         this._router.navigate(['/']);
       },
       error: (error) => {
+        this.loading.set(false);
         console.error('Login failed:', error);
       }
     });

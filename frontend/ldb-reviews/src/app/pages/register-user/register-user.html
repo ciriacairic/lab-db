@@ -1,7 +1,7 @@
 <article class="loginComponent">
   <section class="loginFormContainer">
     <section class="title">
-      <h1>Registro</h1>
+      <h1>Registro de usuários</h1>
     </section>
     <section class="loginForm">
       <section class="inputGroup">
@@ -79,12 +79,19 @@
         >
       </section>
 
-      <button
-        class="loginButton"
-        (click)="onRegisterClick()"
-      >
-      Registrar
-      </button>
+      @if(loading())
+      {
+        <app-spinner></app-spinner>
+      }
+      @else
+      {
+        <button
+          class="loginButton"
+          (click)="onRegisterClick()"
+        >
+        Registrar
+        </button>
+      }
     </section>
   </section>
 </article>

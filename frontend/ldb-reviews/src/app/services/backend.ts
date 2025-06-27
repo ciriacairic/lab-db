@@ -189,10 +189,20 @@ export class Backend {
   }
 
   public postReview(
-    postReviewPayload: PostReviewPayload
+    postReviewPayload: PostReviewPayload,
   ): Observable<any> {
+    let params = new HttpParams()
+      .set('game_id', postReviewPayload.game_id)
+      .set('user_id', postReviewPayload.user_id)
+      .set('markdown_text', postReviewPayload.markdown_text)
+      .set('scores[gameplay]', JSON.stringify(postReviewPayload.scores.gameplay))
+      .set('scores[graphics]', JSON.stringify(postReviewPayload.scores.graphics))
+      .set('scores[sound]', JSON.stringify(postReviewPayload.scores.sound))
+      .set('scores[story]', JSON.stringify(postReviewPayload.scores.story))
+      .set('scores[nostalgic]', JSON.stringify(postReviewPayload.scores.nostalgic));
     return this.http.post<any>(
       `${this.serverUrl}/api/review`, postReviewPayload, {
+      params: params,
       headers: this.headers
     });
   }

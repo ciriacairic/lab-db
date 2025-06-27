@@ -25,12 +25,19 @@
         >
       </section>
 
-      <button
-        class="loginButton"
-        (click)="onLoginClick()"
-      >
-        Entrar
-      </button>
+      @if(loading())
+      {
+        <app-spinner></app-spinner>
+      }
+      @else
+      {
+        <button
+          class="loginButton"
+          (click)="onLoginClick()"
+        >
+          Entrar
+        </button>
+      }
 
       <button
         class="loginButton"

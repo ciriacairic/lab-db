@@ -7,9 +7,11 @@
   {
     <header class="gameHeader">
       <h2 class="gameTitle">{{ gameInfo().name }}</h2>
+      @if(isLoggedIn()){
         <button class="writeReviewButton" (click)="openSelectLibrary()" [disabled]="isLoggedIn() === false">
           Adicionar à Biblioteca
         </button>
+      }
       <hr class="headerSeparator">
     </header>
   
@@ -48,21 +50,24 @@
             <section class="gameInfoSubCard">
               <span class="gameInfoSubCardTitle">Desenvolvedora:</span>
               <section class="gameInfoSubCardContent">
-                <span class="gameReleaseDate">{{ gameInfo().name }}</span>
+                <span class="gameReleaseDate">{{ gameInfo().developer }}</span>
               </section>
             </section>
             <section class="gameInfoSubCard">
               <span class="gameInfoSubCardTitle">Publicadora:</span>
               <section class="gameInfoSubCardContent">
-                <span class="gameReleaseDate">{{ gameInfo().name }}</span>
+                <span class="gameReleaseDate">{{ gameInfo().publisher }}</span>
               </section>
             </section>
-            <section class="gameInfoSubCard">
-              <span class="gameInfoSubCardTitle">Plataformas:</span>
-              <section class="gameInfoSubCardContent">
-                <span class="gameReleaseDate">{{ gameInfo().platforms }}</span>
+            @if(gameInfo().platforms)
+            {
+              <section class="gameInfoSubCard">
+                <span class="gameInfoSubCardTitle">Plataformas:</span>
+                <section class="gameInfoSubCardContent">
+                  <span class="gameReleaseDate">{{ gameInfo().platforms }}</span>
+                </section>
               </section>
-            </section>
+            }
             <section class="gameInfoSubCard">
               <span class="gameInfoSubCardTitle">Gêneros:</span>
               <section class="gameInfoSubCardContent">

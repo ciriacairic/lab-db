@@ -9,14 +9,18 @@
     </section>
   </section>
 
-  <section class="recomendation">
-    <section class="recomendationContainer">
-      <section class="recomendationTitle">
-        <h2>Recomendações</h2>
-      </section>
-      <section class="recomendationContent">
-        <p>Confira as avaliações mais recentes e populares da comunidade.</p>
+  @if(isLoggedIn())
+  {
+
+    <section class="recomendation">
+      <section class="recomendationContainer">
+        <section class="recomendationTitle">
+          <h2>Recomendações</h2>
+        </section>
+        <section class="recomendationContent">
+          <p>Confira as avaliações mais recentes e populares da comunidade.</p>
+        </section>
       </section>
     </section>
-  </section>
+  }
 </article>

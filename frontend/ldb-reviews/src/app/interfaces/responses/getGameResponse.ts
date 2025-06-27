@@ -4,6 +4,8 @@ export interface GetGameResponse {
     "steam_appid": number,
     "required_age": number,
     "is_free": boolean,
+    "developer"?: string,
+    "publisher"?: string,
     "dlc": [number],
     "detailed_description": string,
     "about_the_game": string,
@@ -12,7 +14,7 @@ export interface GetGameResponse {
     "capsule_image": string,
     "capsule_imagev5": string,
     "website": string,
-    "platforms": {
+    "platforms"?: {
         "windows": boolean,
         "mac": boolean,
         "linux": boolean

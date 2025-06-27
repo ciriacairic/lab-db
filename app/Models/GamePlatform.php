@@ -9,8 +9,6 @@ use App\Models\Publisher;
 
 class GamePlatform extends Model
 {
-    protected $table = 'game_platform';
-
     protected $casts = [
         'metacritic' => 'array',
         'recommendations' => 'array',

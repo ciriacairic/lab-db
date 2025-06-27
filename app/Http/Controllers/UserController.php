@@ -30,7 +30,7 @@ class UserController extends Controller
         $password = $request->input('password');
         $handle = $request->input('handle');
         $birth_date = $request->input('birth_date');
-        $nationality = $request->input('nacionality');
+        $nationality = $request->input('nationality');
         $gender = $request->input('gender');
 
         try {

@@ -1,0 +1,37 @@
+<article class="reviewWriteComponent">
+  <section class="reviewWriteContainer">
+    <span class="title">Crie sua biblioteca</span>
+
+    <section class="inputGroup">
+      <span class="inputLabel">Título</span>
+      <input 
+        type="text" 
+        class="reviewWriteTitleInput" 
+        placeholder="Insira o título da sua avaliação" 
+        (input)="onFieldInput('title', $event)" 
+        name="title" required
+      >
+    </section>
+
+    <section class="inputGroup">
+      <span class="inputLabel">Descrição</span>
+      <input 
+        type="text" 
+        class="reviewWriteTitleInput" 
+        placeholder="Insira o título da sua avaliação" 
+        (input)="onFieldInput('description', $event)" 
+        name="title" required
+      >
+    </section>
+
+    <section class="reviewWriteButtonContainer">
+      <button
+        class="reviewWriteButton"
+        (click)="onCreateLibraryClick()"
+      >
+        Enviar Avaliação
+      </button>
+    </section>
+
+  </section>
+</article>

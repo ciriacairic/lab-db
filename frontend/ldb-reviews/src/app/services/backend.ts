@@ -226,7 +226,7 @@ export class Backend {
   }
 
   public getComments(
-    parentId: number,
+    parentId: string,
     parentType: string
   ): Observable<any> {
     return this.http.get<any>(

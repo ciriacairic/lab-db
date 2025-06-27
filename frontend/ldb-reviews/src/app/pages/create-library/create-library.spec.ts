@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Comments } from './comments.component';
+import { CreateLibrary } from './create-library';
 
-describe('Comments', () => {
-  let component: Comments;
-  let fixture: ComponentFixture<Comments>;
+describe('CreateLibrary', () => {
+  let component: CreateLibrary;
+  let fixture: ComponentFixture<CreateLibrary>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Comments]
+      imports: [CreateLibrary]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Comments);
+    fixture = TestBed.createComponent(CreateLibrary);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

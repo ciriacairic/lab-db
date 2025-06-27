@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { Backend } from '../../services/backend';
-import { PostLoginPayload } from '../../interfaces/requests/postLoginPayload';
+import { PostLoginPayload } from '../../interfaces/requests/postloginPayload';
 import { Router } from '@angular/router';
 import { Store } from '../../services/store';
 import { Spinner } from "../../components/spinner/spinner";
@@ -25,7 +25,7 @@ export class Login {
 
   onFieldInput(field: string, event: any)
   {
-    switch (field) 
+    switch (field)
     {
       case 'username':
         this.username.set(event.target.value);

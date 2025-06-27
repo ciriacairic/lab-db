@@ -31,7 +31,7 @@ class CommentController extends Controller
             return response()->json(['error' => 'Invalid request'], 400);
         }
 
-        return response()->json(['success' => true, 'review_id' => $comment->id], 201);
+        return response()->json(['success' => true, 'comment_id' => $comment->id], 201);
     }
 
     public function show($parent_id, $parent_type)

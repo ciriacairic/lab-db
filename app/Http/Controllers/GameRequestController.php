@@ -27,7 +27,7 @@ class GameRequestController extends Controller
             return response()->json(['error' => 'Invalid request'], 400);
         }
 
-        return response()->json(['success' => true, 'review_id' => $gameRequest->id], 201);
+        return response()->json(['success' => true, 'game_request_id' => $gameRequest->id], 201);
     }
 
     public function handle(Request $request, $game_request_id)

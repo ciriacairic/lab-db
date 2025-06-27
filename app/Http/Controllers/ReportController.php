@@ -28,7 +28,7 @@ class ReportController extends Controller
             return response()->json(['error' => 'Invalid request'], 400);
         }
 
-        return response()->json(['success' => true, 'review_id' => $report->id], 201);
+        return response()->json(['success' => true, 'report_id' => $report->id], 201);
     }
 
     public function handle(Request $request, $report_id)

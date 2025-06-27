@@ -1,18 +1,19 @@
 <article class="readReviewComponent">
   <section class="readReviewContainer">
     <header class="readReviewHeader">
-      <h2 class="reviewTitle">{{ reviewInfo().title }}</h2>
+      <h2 class="reviewTitle">Review do jogo: {{ reviewInfo().game_id }}</h2>
       <hr class="headerSeparator">
     </header>
     <markdown class="reviewTextContainer">
-      <p class="reviewText">{{ reviewInfo().content }}</p>
+      <p class="reviewText">{{ reviewInfo().markdown_text }}</p>
     </markdown>
 
     <section class="reviewInfoContainer">
-      <p class="reviewInfo">Data: {{ reviewInfo().data }}</p>
-      <p class="reviewInfo">Autor: {{ reviewInfo().autor }}</p>
-      <p class="reviewInfo">Nota Técnica: {{ reviewInfo().notaTecnica }}</p>
-      <p class="reviewInfo">Nota Subjetiva: {{ reviewInfo().notaTecnica }}</p>
+      <p class="reviewInfo">Gráficos: {{ reviewInfo().scores.graphics }}</p>
+      <p class="reviewInfo">Jogabilidade: {{ reviewInfo().scores.gameplay }}</p>
+      <p class="reviewInfo">Trilha Sonora: {{ reviewInfo().scores.sound }}</p>
+      <p class="reviewInfo">História: {{ reviewInfo().scores.story }}</p>
+      <p class="reviewInfo">Apego Emocional: {{ reviewInfo().scores.nostalgic }}</p>
     </section>
 
   </section>
@@ -20,10 +21,6 @@
   <section class="commentsContainer">
     <h3 class="commentsTitle">Comentários</h3>
     <section class="commentList">
-      @for(comment of reviewInfo().comentarios; track $index) 
-      {
-        <app-comments [comment]="comment"></app-comments>
-      }
     </section>
 
   </section>

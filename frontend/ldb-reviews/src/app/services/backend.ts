@@ -207,6 +207,15 @@ export class Backend {
     });
   }
 
+  public getReview(
+    reviewId: string
+  ): Observable<any> {
+    return this.http.get<any>(
+      `${this.serverUrl}/api/review/${reviewId}`, {
+      headers: this.headers
+    });
+  }
+  
   public deleteReview(
     reviewId: string
   ): Observable<any> {

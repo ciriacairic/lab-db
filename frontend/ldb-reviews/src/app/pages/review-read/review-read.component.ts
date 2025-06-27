@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Comments } from "./components/comments/comments.component";
 import { Backend } from '../../services/backend';
 import { MarkdownComponent } from 'ngx-markdown';
+import { GetReview } from '../../interfaces/responses/getReview';
 
 @Component({
   selector: 'app-review-read',
@@ -16,26 +17,7 @@ export class ReviewRead {
   private _backendService = inject(Backend);
 
   reviewId = signal<string>('');
-  reviewInfo = signal({
-    title: 'Título da Review',
-    content: 'Conteúdo da review detalhada.',
-    autor: 'Autor da Review',
-    data: '2023-10-01',
-    notaTecnica: 9.0,
-    notaSubjetiva: 8.5,
-    comentarios: [
-      {
-        autor: 'Usuario1',
-        data: '2023-10-01',
-        conteudo: 'Comentário interessante sobre a review.'
-      },
-      {
-        autor: 'Usuario1',
-        data: '2023-10-01',
-        conteudo: 'Comentário interessante sobre a review.'
-      }
-    ]
-  });
+  reviewInfo = signal<GetReview>({} as GetReview);
 
   constructor()
   {
@@ -47,6 +29,14 @@ export class ReviewRead {
   
   ngOnInit()
   {
-    
+    this._backendService.getReview(this.reviewId()).subscribe({
+      next: (data) => {
+        console.log('Review data:', data);
+        this.reviewInfo.set(data);
+      }
+      , error: (error) => {
+        console.error('Error fetching review:', error);
+      }
+  })
   }
 }

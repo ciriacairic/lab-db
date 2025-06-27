@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mongo\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -14,6 +15,8 @@ class ReviewController extends Controller
         if (!$review) {
             return response()->json(['error' => 'Review not found'], 404);
         }
+
+        $review->username = User::find('user_id')->name;
 
         return response()->json($review);
     }
@@ -27,7 +30,7 @@ class ReviewController extends Controller
 
         try {
             $review = Review::create([
-                'game_id' => $game_id,
+                'game_id' => "$game_id",
                 'user_id' => $user_id,
                 'markdown_text' => $markdown_text,
                 'scores' => $scores,

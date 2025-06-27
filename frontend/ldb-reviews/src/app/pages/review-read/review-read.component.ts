@@ -1,16 +1,20 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Comments } from "./components/comments/comments.component";
+import { Backend } from '../../services/backend';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
   selector: 'app-review-read',
-  imports: [Comments],
+  imports: [Comments, MarkdownComponent],
   standalone: true,
   templateUrl: './review-read.html',
   styleUrl: './review-read.scss'
 })
 export class ReviewRead {
   private _route = inject(ActivatedRoute);
+  private _backendService = inject(Backend);
+
   reviewId = signal<string>('');
   reviewInfo = signal({
     title: 'Título da Review',
@@ -40,5 +44,9 @@ export class ReviewRead {
       this.reviewId.set(`Detalhes da review com ID: ${reviewId}`);
     });
   }
-
+  
+  ngOnInit()
+  {
+    
+  }
 }

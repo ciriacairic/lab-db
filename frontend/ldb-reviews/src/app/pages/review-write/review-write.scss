@@ -7,3 +7,80 @@
 .reviewWriteComponent {
   @include page-component;
 }
+
+.title{
+  font-weight: 700;
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.reviewWriteContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.reviewWriteTitleInput,
+.reviewWriteRatingInput,
+.reviewWriteDescriptionInput{
+  border-radius: 8px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.reviewWriteDescriptionInput{
+  min-height: 20rem;
+}
+
+.inputGroup{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+.reviewWriteRatingContainer{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.inputGroups{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.reviewWriteButtonContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reviewWriteButton{
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  width: 80%;
+  max-width: 800px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}

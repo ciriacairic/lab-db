@@ -7,3 +7,37 @@
 .readReviewComponent {
   @include page-component;
 }
+
+.readReviewHeader{
+  width: 100%;
+}
+
+.reviewTitle{
+  width: 100%;
+  text-align: center;
+}
+
+.readReviewContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.commentsContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.commentList{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}

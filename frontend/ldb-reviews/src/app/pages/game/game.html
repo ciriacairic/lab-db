@@ -1,104 +1,169 @@
 <article class="gameComponent">
-  <header class="gameHeader">
-    <h2 class="gameTitle">{{ gameInfo().nome }}</h2>
-    <hr class="headerSeparator">
-  </header>
-  <section class="gameContainer">
-    <section class="gameImageContainer">
-      <img 
-        class="gameImage" 
-        src="https://upload.wikimedia.org/wikipedia/pt/0/0d/Elden_Ring_capa.jpg" 
-      >
-    </section>
-
-    <section class="gameInfo">
-      <section class="gameInfoSubCard">
-        <span class="gameInfoCardTitle">Descrição:</span>
-        <section class="gameInfoSubCardContent">
-          <span>{{ gameInfo().descricao }}</span>
-        </section>
+  @if(loadingGameInfo() || loadingImage())
+  {
+    <app-spinner></app-spinner>
+  }
+  @else 
+  {
+    <header class="gameHeader">
+      <h2 class="gameTitle">{{ gameInfo().name }}</h2>
+        <button class="writeReviewButton" (click)="openSelectLibrary()" [disabled]="isLoggedIn() === false">
+          Adicionar à Biblioteca
+        </button>
+      <hr class="headerSeparator">
+    </header>
+  
+    <section class="gameContainer">
+      <section class="gameImageContainer">
+        <img 
+          class="gameImage" 
+          [src]="gameInfo().header_image" 
+        >
       </section>
-
-      <section class="gameInfoCard">
-        <span class="gameInfoCardTitle">Informações:</span>
-        <section class="gameInfoCardContent">
-
-          <section class="gameInfoSubCard">
-            <span class="gameInfoSubCardTitle">Lançamento:</span>
-            <section class="gameInfoSubCardContent">
-              <span class="gameReleaseDate">{{ gameInfo().dataLancamento }}</span>
-            </section>
-          </section>
-          <section class="gameInfoSubCard">
-            <span class="gameInfoSubCardTitle">Classificação Etária:</span>
-            <section class="gameInfoSubCardContent">
-              <span class="gameReleaseDate">{{ gameInfo().classificacaoEtaria }}</span>
-            </section>
-          </section>
-          <section class="gameInfoSubCard">
-            <span class="gameInfoSubCardTitle">Desenvolvedora:</span>
-            <section class="gameInfoSubCardContent">
-              <span class="gameReleaseDate">{{ gameInfo().desenvolvedora }}</span>
-            </section>
-          </section>
-          <section class="gameInfoSubCard">
-            <span class="gameInfoSubCardTitle">Publicadora:</span>
-            <section class="gameInfoSubCardContent">
-              <span class="gameReleaseDate">{{ gameInfo().publicadora }}</span>
-            </section>
-          </section>
-          <section class="gameInfoSubCard">
-            <span class="gameInfoSubCardTitle">Plataformas:</span>
-            <section class="gameInfoSubCardContent">
-              <span class="gameReleaseDate">{{ gameInfo().plataformas }}</span>
-            </section>
-          </section>
-          <section class="gameInfoSubCard">
-            <span class="gameInfoSubCardTitle">Gêneros:</span>
-            <section class="gameInfoSubCardContent">
-              <span class="gameReleaseDate">{{ gameInfo().genero }}</span>
-            </section>
-          </section>
-          <section class="gameInfoSubCard">
-            <span class="gameInfoSubCardTitle">Tags:</span>
-            <section class="gameInfoSubCardContent">
-              <span class="gameReleaseDate">{{ gameInfo().tags }}</span>
-            </section>
+  
+      <section class="gameInfo">
+        <section class="gameInfoSubCard">
+          <span class="gameInfoCardTitle">Sinopse:</span>
+          <section class="gameInfoSubCardContent">
+            <span>{{ gameInfo().short_description }}</span>
           </section>
         </section>
-      </section>
-
-      <section class="gameInfoCard">
-        <span class="gameInfoCardTitle">Notas:</span>
-        <section class="gameInfoCardContent">
-          <section class="gameInfoSubCard">
-            <span class="gameInfoSubCardTitle">Nota Técnica:</span>
-            <section class="gameInfoSubCardContent">
-              <span class="gameReleaseDate">{{ gameInfo().notaTecnica }}</span>
+  
+        <section class="gameInfoCard">
+          <span class="gameInfoCardTitle">Informações:</span>
+          <section class="gameInfoCardContent">
+  
+            <section class="gameInfoSubCard">
+              <span class="gameInfoSubCardTitle">Lançamento:</span>
+              <section class="gameInfoSubCardContent">
+                <span class="gameReleaseDate">{{ gameInfo().release_date }}</span>
+              </section>
             </section>
-          </section>
-          <section class="gameInfoSubCard">
-            <span class="gameInfoSubCardTitle">Nota Subjetiva:</span>
-            <section class="gameInfoSubCardContent">
-              <span class="gameReleaseDate">{{ gameInfo().notaSubjetiva }}</span>
+            <section class="gameInfoSubCard">
+              <span class="gameInfoSubCardTitle">Classificação Etária:</span>
+              <section class="gameInfoSubCardContent">
+                <span class="gameReleaseDate">{{ gameInfo().required_age }}</span>
+              </section>
+            </section>
+            <section class="gameInfoSubCard">
+              <span class="gameInfoSubCardTitle">Desenvolvedora:</span>
+              <section class="gameInfoSubCardContent">
+                <span class="gameReleaseDate">{{ gameInfo().name }}</span>
+              </section>
+            </section>
+            <section class="gameInfoSubCard">
+              <span class="gameInfoSubCardTitle">Publicadora:</span>
+              <section class="gameInfoSubCardContent">
+                <span class="gameReleaseDate">{{ gameInfo().name }}</span>
+              </section>
+            </section>
+            <section class="gameInfoSubCard">
+              <span class="gameInfoSubCardTitle">Plataformas:</span>
+              <section class="gameInfoSubCardContent">
+                <span class="gameReleaseDate">{{ gameInfo().platforms }}</span>
+              </section>
+            </section>
+            <section class="gameInfoSubCard">
+              <span class="gameInfoSubCardTitle">Gêneros:</span>
+              <section class="gameInfoSubCardContent">
+                <span class="gameReleaseDate">{{ gameInfo().name }}</span>
+              </section>
+            </section>
+            <section class="gameInfoSubCard">
+              <span class="gameInfoSubCardTitle">Tags:</span>
+              <section class="gameInfoSubCardContent">
+                <span class="gameReleaseDate">{{ gameInfo().name }}</span>
+              </section>
             </section>
           </section>
         </section>
+  
+        <section class="gameInfoCard">
+          <span class="gameInfoCardTitle">Notas:</span>
+          <section class="gameInfoCardContent">
+            <section class="gameInfoSubCard">
+              <span class="gameInfoSubCardTitle">Nota Técnica:</span>
+              <section class="gameInfoSubCardContent">
+                <span class="gameReleaseDate">{{ gameInfo().technical_score ?? 'N/A' }}</span>
+              </section>
+            </section>
+            <section class="gameInfoSubCard">
+              <span class="gameInfoSubCardTitle">Nota Subjetiva:</span>
+              <section class="gameInfoSubCardContent">
+                <span class="gameReleaseDate">{{ gameInfo().subjective_score ?? 'N/A' }}</span>
+              </section>
+            </section>
+          </section>
+        </section>
+  
+      </section>
+    </section>
+  
+    <hr class="contentSeparator">
+  
+    <section class="reviewsContainer">
+      <section class="reviewHeaderContainer">
+        <h2 class="reviewsTitle">Avaliações</h2>
+        <button class="writeReviewButton" (click)="onWriteReviewClick()" [disabled]="isLoggedIn() === false">
+          Escrever Avaliação
+        </button>
+        @if(isLoggedIn() === false)
+        {
+          <span class="loginRequiredMessage">Faça login para escrever uma avaliação.</span>
+        }
       </section>
 
+      <section class="reviewList">
+        @if(loadingReviews())
+        {
+          <app-spinner></app-spinner>
+        }
+        @else
+        {
+          @for(review of gameReviews(); track $index)
+          {
+            <app-review-card [review]="review"></app-review-card>
+          }
+          @if (showNoReviewsMessage())
+          {
+            <span class="noReviewsMessage">Nenhuma avaliação encontrada para este jogo.</span>
+          }
+        }
+      </section>
     </section>
-  </section>
 
-  <hr class="contentSeparator">
-
-  <section class="reviewsContainer">
-    <h3 class="reviewsTitle">Avaliações</h3>
-    <section class="reviewList">
-      @for(review of gameInfo().reviews; track $index)
-      {
-        <app-review-card [review]="review"></app-review-card>
-      }
-    </section>
-  </section>
+  }
 
 </article>
+
+@if(showSelectLibraryModal())
+{
+  <div class="modalBackground">
+    <section class="selectLibraryModal">
+      <header class="modalHeader">
+        <h2 class="modalTitle">Selecione uma Biblioteca</h2>
+        <button class="closeModalButton" (click)="closeSelectLibrary()">X</button
+        >
+      </header>
+      <section class="libraryList">
+        @if(loadingLibraries())
+        {
+          <app-spinner></app-spinner>
+        }
+        @else
+        {
+          @for(library of libraries(); track $index)
+          {
+            <button class="libraryItem" (click)="onAddLibraryClick(library.id)">
+              {{ library.name }}
+            </button>
+          }
+          @if(showNoResultsLibraryMessage())
+          {
+            <span class="noResultsMessage">Nenhuma biblioteca criada.</span>
+          }
+        }
+      </section>
+    </section>
+  </div>
+}

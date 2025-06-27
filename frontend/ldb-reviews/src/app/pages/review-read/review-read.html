@@ -1,20 +1,18 @@
 <article class="readReviewComponent">
   <section class="readReviewContainer">
-
-    <section class="reviewImageContainer">
-      <img 
-        class="reviewImage" 
-        [src]="reviewInfo()" 
-      >
-    </section>
-
-    <section class="reviewInfo">
+    <header class="readReviewHeader">
       <h2 class="reviewTitle">{{ reviewInfo().title }}</h2>
-      <p class="reviewDescription">Descrição: {{ reviewInfo().content }}</p>
-      <p class="reviewAuthor">Autor: {{ reviewInfo().autor }}</p>
-      <p class="reviewDate">Data: {{ reviewInfo().data }}</p>
-      <p class="reviewRating">Nota Técnica: {{ reviewInfo().notaTecnica }}</p>
-      <p class="reviewRating">Nota Subjetiva: {{ reviewInfo().notaTecnica }}</p>
+      <hr class="headerSeparator">
+    </header>
+    <markdown class="reviewTextContainer">
+      <p class="reviewText">{{ reviewInfo().content }}</p>
+    </markdown>
+
+    <section class="reviewInfoContainer">
+      <p class="reviewInfo">Data: {{ reviewInfo().data }}</p>
+      <p class="reviewInfo">Autor: {{ reviewInfo().autor }}</p>
+      <p class="reviewInfo">Nota Técnica: {{ reviewInfo().notaTecnica }}</p>
+      <p class="reviewInfo">Nota Subjetiva: {{ reviewInfo().notaTecnica }}</p>
     </section>
 
   </section>
@@ -22,7 +20,8 @@
   <section class="commentsContainer">
     <h3 class="commentsTitle">Comentários</h3>
     <section class="commentList">
-      @for(comment of reviewInfo().comentarios; track $index) {
+      @for(comment of reviewInfo().comentarios; track $index) 
+      {
         <app-comments [comment]="comment"></app-comments>
       }
     </section>

@@ -1,0 +1,20 @@
+export interface GetUserResponse {
+  "id": number,
+  "name": string,
+  "email": string,
+  "nationality": any,
+  "gender": string,
+  "verified": false,
+  "ranking": any,
+  "avatar": any,
+  "handle": string,
+  "description": any,
+  "steam_profile": any,
+  "birth_date": "21331233",
+  "status": string,
+  "role": any,
+  "theme_id": any,
+  "created_at": Date,
+  "updated_at": Date,
+  "theme": any
+}

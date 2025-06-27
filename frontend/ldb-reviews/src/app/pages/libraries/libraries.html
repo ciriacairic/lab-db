@@ -1,15 +1,22 @@
 <article class="librariesComponent">
-  <section class="librariesContainer">
-    <h1 class="librariesTitle">Bibliotecas</h1>
-    <section class="libraryList">
-      @for(library of libraries(); track $index) 
-      {
-        <button class="libraryCard" (click)="onLibraryClick()">
-          <section class="libraryInfo">
-            <h2 class="libraryName">{{ library.name }}</h2>
-          </section>
-        </button>
-      }
-    </section>
+  <section class="searchResultsHeader">
+    <h2 class="searchResultsTitle">Bibliotecas</h2>
+  </section>
+
+  <section class="searchResultsContainer">
+    @if(loading())
+    {
+      <app-spinner></app-spinner>
+    }
+    @for(library of libraries(); track $index)
+    {
+      <app-library-card class="searchResultItem" [library]="library">
+        {{ library.name }}
+      </app-library-card>
+    }
+    @if(showNoResultsMessage())
+    {
+      <span class="noResultsMessage">Nenhuma biblioteca criada.</span>
+    }
   </section>
 </article>

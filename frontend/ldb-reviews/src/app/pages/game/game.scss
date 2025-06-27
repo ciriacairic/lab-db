@@ -26,7 +26,7 @@
 
 .gameContainer{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 3rem;
   align-items: center;
   margin: 1rem 0;
@@ -34,13 +34,13 @@
 
 .gameImageContainer{
   border: inset 10px darkgoldenrod;
-  width: 230px;
-  height: 300px;
+  width: 460px;
+  height: 215px;
 }
 
 .gameImage{
-  width: 230px;
-  height: 300px;
+  width: 460px;
+  height: 215px;
 }
 
 .gameInfo{
@@ -102,6 +102,7 @@
   align-items: center;
   width: 100%;
   gap: 2rem;
+  margin: 2rem 0;
 }
 
 .reviewsContainer{
@@ -116,4 +117,80 @@
   border-radius: 8px;
   box-shadow: 0px 0px 4px #00000036;
   border: 2px solid #d3d3d357;
+}
+
+.reviewHeaderContainer{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.writeReviewButton{
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  width: 30%;
+  max-width: 500px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.modalBackground{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selectLibraryModal{
+  display: flex;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 90%;
+  max-width: 600px;
+  height: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  overflow: auto;
+}
+
+.modalHeader{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.closeModalButton{
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 15px;
+  width: 30%;
+  max-width: 50px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.libraryList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
 }

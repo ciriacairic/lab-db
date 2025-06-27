@@ -25,56 +25,68 @@
     </section>
     
     <section class="reviewWriteRatingContainer">
-      <span class="reviewWriteRatingLabel">Atribua as notas ao jogo</span>
-      <section class="inputGroup">
-        <span class="inputLabel">Gráficos</span>
-        <input 
-          type="number" 
-          class="reviewWriteRatingInput" 
-          placeholder="Insira a nota da sua avaliação" 
-          (input)="onFieldInput('rating', $event)" 
-          name="rating" required
-        >
-      </section>
-      <section class="inputGroup">
-        <span class="inputLabel">Narrativa</span>
-        <input 
-          type="number" 
-          class="reviewWriteRatingInput" 
-          placeholder="Insira a nota da sua avaliação" 
-          (input)="onFieldInput('rating', $event)" 
-          name="rating" required
-        >
-      </section>
-      <section class="inputGroup">
-        <span class="inputLabel">Design de Som</span>
-        <input 
-          type="number" 
-          class="reviewWriteRatingInput" 
-          placeholder="Insira a nota da sua avaliação" 
-          (input)="onFieldInput('rating', $event)" 
-          name="rating" required
-        >
-      </section>
-      <section class="inputGroup">
-        <span class="inputLabel">Gameplay</span>
-        <input 
-          type="number" 
-          class="reviewWriteRatingInput" 
-          placeholder="Insira a nota da sua avaliação" 
-          (input)="onFieldInput('rating', $event)" 
-          name="rating" required
-        >
-      </section>
-      <section class="inputGroup">
-        <span class="inputLabel">Apego emocional</span>
-        <input 
-          type="number" 
-          class="reviewWriteRatingInput" 
-          placeholder="Insira a nota da sua avaliação" 
-          (input)="onFieldInput('rating', $event)" 
-          name="rating" required
-        >
+      <span class="title">Atribua as notas ao jogo</span>
+      <section class="inputGroups">
+        <section class="inputGroup">
+          <span class="inputLabel">Gráficos</span>
+          <input 
+            type="number" 
+            max="10"
+            min="0"
+            class="reviewWriteRatingInput" 
+            placeholder="Insira a nota da sua avaliação" 
+            (input)="onRatingInput('graphics', $event)" 
+            name="graphics" required
+          >
+        </section>
+        <section class="inputGroup">
+          <span class="inputLabel">Narrativa</span>
+          <input 
+            type="number" 
+            max="10"
+            min="0"
+            class="reviewWriteRatingInput" 
+            placeholder="Insira a nota da sua avaliação" 
+            (input)="onRatingInput('story', $event)" 
+            name="story" required
+          >
+        </section>
+        <section class="inputGroup">
+          <span class="inputLabel">Design de Som</span>
+          <input 
+            type="number" 
+            max="10"
+            min="0"
+            class="reviewWriteRatingInput" 
+            placeholder="Insira a nota da sua avaliação" 
+            (input)="onRatingInput('sound', $event)" 
+            name="sound" required
+          >
+        </section>
+        <section class="inputGroup">
+          <span class="inputLabel">Gameplay</span>
+          <input 
+            type="number" 
+            max="10"
+            min="0"
+            class="reviewWriteRatingInput" 
+            placeholder="Insira a nota da sua avaliação" 
+            (input)="onRatingInput('gameplay', $event)" 
+            name="gameplay" required
+          >
+        </section>
+        <section class="inputGroup">
+          <span class="inputLabel">Apego emocional</span>
+          <input 
+            type="number" 
+            max="10"
+            min="0"
+            class="reviewWriteRatingInput" 
+            placeholder="Insira a nota da sua avaliação" 
+            (input)="onRatingInput('nostalgic', $event)" 
+            name="nostalgic" required
+          >
+        </section>
       </section>
     </section>
 

@@ -4,11 +4,19 @@
   </section>
 
   <section class="searchResultsContainer">
+    @if(loading())
+    {
+      <app-spinner></app-spinner>
+    }
     @for(game of searchResults(); track $index)
     {
-      <app-game-card class="searchResultItem">
+      <app-game-card class="searchResultItem" [game]="game">
         {{ game.name }}
       </app-game-card>
+    }
+    @if(showNoResultsMessage())
+    {
+      <span class="noResultsMessage">Nenhum resultado encontrado para "{{ searchQuery() }}".</span>
     }
   </section>
 </article>

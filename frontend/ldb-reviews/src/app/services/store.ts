@@ -19,4 +19,11 @@ export class Store {
       return of(localStorage.getItem(item));
     return of(null)
   }
+
+  removeItem(item:string): Observable<void>
+  {
+    if(typeof localStorage != 'undefined')
+      localStorage.removeItem(item);
+    return of();
+  }
 }

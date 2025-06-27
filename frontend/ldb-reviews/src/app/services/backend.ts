@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { PostLoginPayload } from '../interfaces/requests/postloginPayload';
 import { PostUserRegisterPayload } from '../interfaces/requests/postUserRegisterPayload';
 import { PostFollowPayload } from '../interfaces/requests/postFollowPayload';
 import { PostCreateLibraryPayload } from '../interfaces/requests/postCreateLibraryPayload';
@@ -13,6 +12,8 @@ import { PostGameRequestDecisionPayload } from '../interfaces/requests/postGameR
 import { PostReportPayload } from '../interfaces/requests/postReportPayload';
 import { PostReportDecicionPayload } from '../interfaces/requests/postReportDecisionPayload';
 import { PostGamePayload } from '../interfaces/requests/postGamePayload';
+import { GetGameResponse } from '../interfaces/responses/getGameResponse';
+import { PostLoginPayload } from '../interfaces/requests/postLoginPayload';
 
 @Injectable({
   providedIn: 'root'
@@ -206,10 +207,11 @@ export class Backend {
   }
 
   public getComments(
-    reviewId: string
+    parentId: number,
+    parentType: string
   ): Observable<any> {
     return this.http.get<any>(
-      `${this.serverUrl}/api/comment/${reviewId}`, {
+      `${this.serverUrl}/api/comment/${parentId}/${parentType}`, {
       headers: this.headers
     });
   }
@@ -312,18 +314,17 @@ export class Backend {
   }
 
   public getGameSearch(
-    searchQuery: HttpParams
+    searchQuery: string
   ): Observable<any> {
     return this.http.get<any>(
-      `${this.serverUrl}/api/game/search`, {
-      params: searchQuery,
+      `${this.serverUrl}/api/game/search/${searchQuery}`, {
       headers: this.headers
     });
   }
 
   public getGame(
     gameId: number
-  ): Observable<any> {
+  ): Observable<GetGameResponse> {
     return this.http.get<any>(
       `${this.serverUrl}/api/game/${gameId}`, {
       headers: this.headers

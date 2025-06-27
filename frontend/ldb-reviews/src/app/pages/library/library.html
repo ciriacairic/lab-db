@@ -1,1 +1,22 @@
-<p>library works!</p>
+<article class="libraryComponent">
+  <section class="searchResultsHeader">
+    <h2 class="searchResultsTitle">Biblioteca {{ libraryId() }}</h2>
+  </section>
+
+  <section class="searchResultsContainer">
+    @if(loading())
+    {
+      <app-spinner></app-spinner>
+    }
+    @for(game of library(); track $index)
+    {
+      <app-game-card class="searchResultItem" [game]="game">
+        {{ game.name }}
+      </app-game-card>
+    }
+    @if(showNoResultsMessage())
+    {
+      <span class="noResultsMessage">Biblioteca vazia.</span>
+    }
+  </section>
+</article>

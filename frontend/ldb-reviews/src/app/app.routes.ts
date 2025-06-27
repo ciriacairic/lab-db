@@ -8,6 +8,7 @@ import { ReviewWrite } from './pages/review-write/review-write.component';
 import { User } from './pages/user/user.component';
 import { Library } from './pages/library/library';
 import { Libraries } from './pages/libraries/libraries';
+import { RegisterUser } from './pages/register-user/register-user';
 
 export const routes: Routes = [
   {
@@ -15,7 +16,7 @@ export const routes: Routes = [
     component: Home,
   },
   {
-    path: 'game/:id',
+    path: 'game/:gameId',
     component: Game,
   },
   {
@@ -31,7 +32,7 @@ export const routes: Routes = [
     component: ReviewRead,
   },
   {
-    path: 'review-write',
+    path: 'review-write/:gameId',
     component: ReviewWrite,
   },
   {
@@ -45,5 +46,9 @@ export const routes: Routes = [
   {
     path: 'libraries/:userId',
     component: Libraries
+  },
+  {
+    path: 'register-user',
+    component: RegisterUser
   }
 ];

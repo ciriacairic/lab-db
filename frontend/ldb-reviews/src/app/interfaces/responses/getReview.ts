@@ -7,4 +7,5 @@ export interface GetReview{
   "scores": Scores;
   "id": string;
   "created_at": string;
+  'username': string;
 }

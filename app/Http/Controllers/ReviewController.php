@@ -16,7 +16,7 @@ class ReviewController extends Controller
             return response()->json(['error' => 'Review not found'], 404);
         }
 
-        $review->username = User::find('user_id')->name;
+        $review->username = User::find($review->user_id)->name;
 
         return response()->json($review);
     }

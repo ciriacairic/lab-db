@@ -10,6 +10,7 @@ use App\Models\Mongo\Review;
 use App\Models\Platform;
 use App\Models\Publisher;
 use App\Models\PublisherGame;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -53,6 +54,10 @@ class GameController extends Controller
 
         if ($reviews->isEmpty()) {
             return response()->json(['error' => 'Game not found or no reviews'], 404);
+        }
+
+        foreach ($reviews as $review) {
+            $review->username = User::find($review->user_id)->name;
         }
 
         return response()->json($reviews);

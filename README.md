@@ -31,6 +31,8 @@ php artisan key:generate
 Para seedar os bancos:
 ```
 php artisan crawler-steam
+php artisan seed-ps-mongo
+php artisan seed-neo
 ```
 Para executar o teste do banco:
 ```

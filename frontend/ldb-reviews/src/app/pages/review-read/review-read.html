@@ -25,11 +25,68 @@
   
     </section>
   
-    <section class="commentsContainer">
-      <h3 class="commentsTitle">Comentários</h3>
-      <section class="commentList">
+    <section class="reviewsContainer">
+      <section class="reviewHeaderContainer">
+        <h2 class="reviewsTitle">Comentários</h2>
+        <button class="writeReviewButton" (click)="openWriteCommentModal()" [disabled]="isLoggedIn() === false">
+          Comentar
+        </button>
+        @if(isLoggedIn() === false)
+        {
+          <span class="loginRequiredMessage">Faça login para escrever uma avaliação.</span>
+        }
       </section>
-  
+
+      <section class="reviewList">
+        @if(loadingComments())
+        {
+          <app-spinner></app-spinner>
+        }
+        @else
+        {
+          @for(comment of reviewComments(); track $index)
+          {
+            <app-comment-card [comment]="comment"></app-comment-card>
+          }
+          @if (showNoCommentsMessage())
+          {
+            <span class="noReviewsMessage">Nenhuma avaliação encontrada para este jogo.</span>
+          }
+        }
+      </section>
     </section>
     }
 </article>
+
+@if(showWriteCommentModal())
+{
+  <div class="modalBackground">
+    <article class="followersFollowingModal">
+      <header class="modalHeader">
+        <button class="closeButton" (click)="showWriteCommentModal.set(false)">
+          X
+        </button>
+      </header>
+      <section class="writeCommentContainer">
+        <span class="title">Escreva um comentário</span>
+
+        <section class="inputGroup">
+          <span class="inputLabel">Comentário</span>
+          <input 
+            type="text" 
+            class="reviewWriteTitleInput" 
+            placeholder="Insira o seu comentário" 
+            (input)="onFieldInput('text', $event)" 
+            name="markdown_text" required
+          >
+        </section>
+
+        <section class="inputGroup">
+          <button class="writeCommentButton" (click)="onWriteCommentClick()">
+            Enviar Comentário
+          </button>
+        </section>
+      </section>
+    </article>
+  </div>
+}

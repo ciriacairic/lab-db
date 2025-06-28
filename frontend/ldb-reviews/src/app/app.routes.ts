@@ -9,6 +9,7 @@ import { User } from './pages/user/user.component';
 import { Library } from './pages/library/library';
 import { Libraries } from './pages/libraries/libraries';
 import { RegisterUser } from './pages/register-user/register-user';
+import { CreateLibrary } from './pages/create-library/create-library';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,10 @@ export const routes: Routes = [
   {
     path: 'libraries/:userId',
     component: Libraries
+  },
+  {
+    path: 'create-libraries',
+    component: CreateLibrary
   },
   {
     path: 'register-user',

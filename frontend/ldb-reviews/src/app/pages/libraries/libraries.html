@@ -1,6 +1,12 @@
 <article class="librariesComponent">
   <section class="searchResultsHeader">
     <h2 class="searchResultsTitle">Bibliotecas</h2>
+    @if(isLoggedIn())
+    {
+      <button class="writeReviewButton" (click)="onCreateLibraryClick()">
+        Criar Biblioteca
+      </button>
+    }
   </section>
 
   <section class="searchResultsContainer">

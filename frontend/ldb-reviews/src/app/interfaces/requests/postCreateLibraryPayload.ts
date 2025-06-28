@@ -1,5 +1,5 @@
 export interface PostCreateLibraryPayload {
   name: string;
-  ownder_id: number;
+  owner_id: number;
   description: string;
 }

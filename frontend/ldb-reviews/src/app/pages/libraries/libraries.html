@@ -3,7 +3,7 @@
     <h2 class="searchResultsTitle">Bibliotecas</h2>
     @if(isLoggedIn())
     {
-      <button class="writeReviewButton" (click)="onCreateLibraryClick()" [disabled]="isLoggedIn() === false">
+      <button class="writeReviewButton" (click)="onCreateLibraryClick()">
         Criar Biblioteca
       </button>
     }

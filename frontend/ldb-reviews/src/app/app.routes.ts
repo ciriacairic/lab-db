@@ -49,7 +49,7 @@ export const routes: Routes = [
     component: Libraries
   },
   {
-    path: 'libraries/create',
+    path: 'create-libraries',
     component: CreateLibrary
   },
   {

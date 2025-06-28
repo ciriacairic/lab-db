@@ -77,9 +77,13 @@ export class Libraries {
 
   onCreateLibraryClick()
   {
-    if (this.isLoggedIn()) {
+    if (this.isLoggedIn())
+    {
+      console.log('User is logged in, redirecting to create library page');
       this._router.navigate(['/libraries/create']);
-    } else {
+    }
+    else
+    {
       console.warn('User is not logged in, redirecting to login page');
       this._router.navigate(['/login']);
     }

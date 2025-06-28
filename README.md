@@ -36,3 +36,26 @@ Para executar o teste do banco:
 ```
 php artisan test-db
 ```
+Para a API servir as requisições execute:
+```
+php artisan serve --host=0.0.0.0 --port=8000
+```
+
+## Frontend
+Acesse o container workspace como root
+```
+docker-compose exec workspace bash
+```
+Entre na pasta:
+```
+cd frontend/ldb-reviews
+```
+Rode os seguintes comandos:
+```
+curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+apt-get install -y nodejs
+npm install
+npm install -g @angular/cli
+ng serve --host 0.0.0.0
+```
+Para acessar no navegador:
